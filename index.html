@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nairaland Forum Clone - Naija No.1 Forum</title>
+<style>
+body{margin:0;font-family:Verdana;background:#f6f6ec}
+header{background:#2f5c2f;color:#fff;padding:12px;text-align:center}
+header h1{margin:0}
+header a{color:yellow;text-decoration:none}
+header input{width:95%;max-width:600px;padding:8px;border-radius:20px;border:0;margin-top:8px}
+.info{background:#e8e8d0;padding:6px;text-align:center;font-size:12px}
+.wrap{max-width:1100px;margin:auto;display:flex;gap:10px;padding:10px}
+.main{flex:3}.side{flex:1}
+.card{background:#fff;border:1px solid #c5c5a5;margin-bottom:5px}
+.head{background:#e6e8d5;padding:6px 10px;font-weight:bold;font-size:13px}
+.topic{padding:10px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;cursor:pointer}
+.topic:hover{background:#ffffcc}
+.btn{width:100%;background:#2f5c2f;color:#fff;border:0;padding:12px;font-weight:bold;cursor:pointer}
+.view{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#f6f6ec;z-index:99;overflow:auto}
+.view-head{background:#2f5c2f;color:#fff;padding:15px}
+#modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:100}
+#modal>div{background:#fff;width:90%;max-width:500px;margin:30px auto;padding:15px}
+#modal input,#modal textarea,#modal select{width:100%;padding:10px;margin:5px 0}
+</style>
+</head>
+<body>
+<header>
+<h1>NAIRALAND FORUM</h1>
+<div>Welcome Guest: Register / Login / Trending / Recent</div>
+<input id="search" placeholder="Search...">
+</header>
+<div class="info">Nairaland Clone - All Topics Displayed Here</div>
+<div class="wrap">
+<div class="main">
+<button class="btn" onclick="document.getElementById('modal').style.display='block'">+ CREATE NEW TOPIC</button>
+<div id="list"></div>
+</div>
+<div class="side">
+<div class="card" style="padding:10px;font-size:13px"><b>Advert Here</b><br>Contact blessman13e</div>
+</div>
+</div>
+<div id="topicView" class="view">
+<div class="view-head"><span onclick="document.getElementById('topicView').style.display='none'" style="cursor:pointer">← Back</span><h2 id="vTitle"></h2></div>
+<div style="max-width:800px;margin:auto;background:#fff;padding:15px;margin-top:10px">
+<p id="vBody"></p><hr><div id="vComments"></div>
+<textarea id="reply" placeholder="Write comment..." style="width:100%;padding:10px"></textarea>
+<button class="btn" onclick="postReply()">Post Comment</button>
+</div>
+</div>
+<div id="modal"><div>
+<h3>New Topic</h3>
+<select id="cat"><option>Politics</option><option>Romance</option><option>Crime</option><option>Business</option><option>Sports</option><option>Jokes</option></select>
+<input id="tTitle" placeholder="Topic title">
+<textarea id="tBody" placeholder="Write story..."></textarea>
+<button class="btn" onclick="createTopic()">POST</button>
+<button onclick="document.getElementById('modal').style.display='none'" style="width:100%;padding:10px">Cancel</button>
+</div></div>
+<script>
+let topics=JSON.parse(localStorage.getItem('naija')||'null')||[
+{id:1,cat:'Politics',title:'Fuel price don drop? NNPC talk',body:'True or false guys?',comments:['Na lie'],views:1200},
+{id:2,cat:'Romance',title:'My girlfriend say choose her or mama',body:'Advice needed',comments:['Mama first'],views:892},
+{id:3,cat:'Crime',title:'Thief caught for Computer Village',body:'Dem catch am today',comments:['Good'],views:2341}
+];
+let cur=null;
+function save(){localStorage.setItem('naija',JSON.stringify(topics))}
+function render(){
+let q=(document.getElementById('search').value||'').toLowerCase();
+let h='',seen={};
+topics.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{
+if(!seen[t.cat]){seen[t.cat]=1; h+=`<div class="head">${t.cat}</div>`}
+h+=`<div class="card"><div class="topic" onclick="openTopic(${t.id})"><div><b>${t.title}</b><br><small>${t.views} views</small></div><small>${t.comments.length}</small></div></div>`;
+});
+document.getElementById('list').innerHTML=h;
+}
+function openTopic(id){cur=topics.find(t=>t.id===id);cur.views++;save();document.getElementById('vTitle').innerText=cur.title;document.getElementById('vBody').innerText=cur.body;document.getElementById('vComments').innerHTML=cur.comments.map(c=>`<div style="background:#f9f9e6;border:1px solid #ccc;padding:8px;margin:5px 0">${c}</div>`).join('');document.getElementById('topicView').style.display='block';render()}
+function postReply(){let txt=document.getElementById('reply').value;if(!txt)return;cur.comments.push(txt);save();openTopic(cur.id);document.getElementById('reply').value=''}
+function createTopic(){let t=document.getElementById('tTitle').value,b=document.getElementById('tBody').value,c=document.getElementById('cat').value;if(!t)return alert('Add title');topics.unshift({id:Date.now(),cat:c,title:t,body:b,comments:[],views:1});save();document.getElementById('modal').style.display='none';render()}
+document.getElementById('search').oninput=render;render();
+</script>
+</body>
+</html>
