@@ -32,23 +32,22 @@ body{background:#000;color:#c8e6c8}
 .back-btn{background:#1a4d1a;color:#fff;border:none;padding:7px 14px;border-radius:12px;cursor:pointer;font-size:12px}
 .admin-btn{background:#ffcc00;color:#000;border:none;padding:7px 14px;border-radius:12px;cursor:pointer;font-size:12px;font-weight:bold;display:none}
 .admin-btn.show{display:inline-block}
-.del-btn{background:#660000;color:#fff;border:none;padding:4px 10px;border-radius:10px;cursor:pointer;font-size:10px;margin-left:8px}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.93);z-index:99;align-items:center;justify-content:center;padding:10px}
 .modal.show{display:flex}
-.modal-box{background:#f5f5e5;color:#000;width:100%;max-width:450px;border-radius:10px;max-height:92vh;overflow:auto}
+.modal-box{background:#f5f5e5;color:#000;width:100%;max-width:400px;border-radius:10px;max-height:92vh;overflow:auto}
 .modal-box.wide{max-width:700px}
-.modal-box.profile{max-width:500px;background:#0e2e0e;color:#c8e6c8;border:2px solid #1a4d1a}
+.modal-box.profile{max-width:480px;background:#0e2e0e;color:#c8e6c8;border:2px solid #1a4d1a}
 .modal-header{background:#003300;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center}
 .modal-body{padding:16px;font-size:13px;line-height:1.6}
 .profile .modal-header{background:#1a4d1a}
 .profile .modal-body{background:#0e2e0e}
-.profile label{color:#c8e6c8;font-size:13px;display:block;margin-top:12px;text-align:left}
+.profile label{color:#c8e6c8;font-size:13px;display:block;margin-top:12px;text-align:left;font-weight:bold}
 .profile input,.profile select{padding:10px;background:#1a3d1a;color:#fff;border:1px solid #2d5a2d;border-radius:20px;width:100%;margin-top:4px}
 .profile .row{display:flex;gap:8px}
 .profile .file-row{display:flex;align-items:center;gap:10px;margin-top:8px}
 .profile .file-btn{background:#e0e0e0;color:#000;padding:6px 12px;border-radius:4px;border:1px solid #999;cursor:pointer;font-size:13px}
 .profile .deact{color:#7ac0c0;text-align:center;margin:14px 0;cursor:pointer;text-decoration:underline;font-size:14px}
-.profile .update-btn{background:#1a4d1a;color:#c8e6c8;border:1px solid #2d5a2d;padding:10px 25px;border-radius:20px;cursor:pointer;display:block;margin:14px auto;font-weight:bold}
+.profile .update-btn{background:#1a4d1a;color:#c8e6c8;border:1px solid #2d5a2d;padding:10px 25px;border-radius:20px;cursor:pointer;display:block;margin:14px auto;font-weight:bold;width:80%}
 .comment{background:#e8e8d0;padding:9px;margin:7px 0;border-left:3px solid #2d5a2d;font-size:12px;border-radius:3px;color:#000}
 #toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#003300;color:#fff;padding:10px 20px;border-radius:20px;display:none;z-index:200;font-size:13px}
 input,textarea,select{border:1px solid #999;border-radius:6px;padding:11px;width:100%;margin:7px 0;font-size:14px}
@@ -62,13 +61,13 @@ input,textarea,select{border:1px solid #999;border-radius:6px;padding:11px;width
 <div class="date" id="dateStr"></div>
 <div class="search-box"><input id="q" placeholder="Search topics..."><button onclick="doSearch()">Search</button></div>
 </div>
-
 <div class="main">
 <div class="card" id="homeCard">
 <div class="welcome-title">Welcome to Blessman Forum</div>
 <div class="boards" id="boardList"></div>
 <div style="text-align:center;margin-top:18px;font-size:12px;padding:10px;background:#001a00;border-radius:8px">
 <span style="color:#ffcc00;cursor:pointer;text-decoration:underline;font-weight:bold" onclick="openModal('adminLoginModal')">🔐 Admin Login</span>
+<span style="color:#888"> — Must Register to Edit Profile & Comment</span>
 </div>
 </div>
 <div class="card" id="topicCard" style="display:none">
@@ -79,57 +78,55 @@ input,textarea,select{border:1px solid #999;border-radius:6px;padding:11px;width
 
 <div class="modal" id="viewModal"><div class="modal-box wide"><div class="modal-header"><b id="vTitle" style="flex:1"></b><span style="display:flex;gap:8px;align-items:center"><button id="delBtn" onclick="deleteCurrent()" style="background:#cc0000;color:#fff;border:none;padding:5px 10px;border-radius:8px;font-size:11px;display:none">Delete</button><span onclick="closeModal('viewModal')" style="cursor:pointer;font-size:24px">×</span></span></div><div class="modal-body" id="vBody"></div></div></div>
 
-<!-- EDIT PROFILE MODAL LIKE NAIRALAND -->
 <div class="modal" id="profileModal"><div class="modal-box profile"><div class="modal-header"><b>Edit My Profile</b><span onclick="closeModal('profileModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body">
 <div style="text-align:center;font-size:12px;color:#8cc48c;margin-bottom:10px">Blessman Forum › My profile › Edit My Profile</div>
-<div style="font-size:13px;margin-bottom:12px"><b>Email:</b> <span id="pEmailDisplay"></span> <span style="color:#7ac0c0;cursor:pointer;text-decoration:underline" onclick="changeEmail()">Change Email</span></div>
+<div style="font-size:13px;margin-bottom:8px"><b>Username:</b> <span id="pUserDisplay" style="color:#ffcc00"></span></div>
 
 <label>Birthday:</label>
-<div class="row">
-<select id="pDay"><option>-- Day --</option></select>
-<select id="pMonth"><option>-- Month --</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
-</div>
-<select id="pYear" style="max-width:120px;margin:8px auto;display:block"><option>-- Year --</option></select>
+<div class="row"><select id="pDay"><option>-- Day --</option></select><select id="pMonth"><option>-- Month --</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></div>
+<select id="pYear" style="max-width:130px;margin:8px 0"><option>-- Year --</option></select>
 
-<label>Gender:</label><select id="pGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
-<label>Personal text:</label><input id="pText" placeholder="">
-<label>Signature:</label><input id="pSig" placeholder="">
+<label>Gender:</label><select id="pGender"><option value="">-- Select --</option><option>Male</option><option>Female</option><option>Other</option></select>
+<label>Personal text:</label><input id="pText" placeholder="e.g. I love politics">
+<label>Signature:</label><input id="pSig" placeholder="Your signature">
 <label>Picture:</label>
-<div class="file-row">
-<label class="file-btn"><input type="file" id="pPicFile" accept="image/*" style="display:none" onchange="previewPic(this)">Choose File</label>
-<span id="pFileName" style="font-size:12px">No file chosen</span>
-</div>
+<div class="file-row"><label class="file-btn"><input type="file" id="pPicFile" accept="image/*" style="display:none" onchange="previewPic(this)">Choose File</label><span id="pFileName" style="font-size:12px">No file chosen</span></div>
 <div id="pPicPreview" style="margin-top:8px;text-align:center"></div>
 <div style="margin-top:8px;font-size:13px"><input type="checkbox" id="pRemovePic" style="width:auto"> Remove this image</div>
 
-<label>Location:</label><input id="pLocation" placeholder="">
+<label>Location:</label><input id="pLocation" placeholder="e.g. Lagos">
 <label>YIM:</label><input id="pYIM" placeholder="">
-<label>Twitter:</label><input id="pTwitter" placeholder="">
+<label>Twitter:</label><input id="pTwitter" placeholder="@username">
 <label>Facebook:</label><input id="pFacebook" placeholder="">
 
 <div class="deact" onclick="deactivateAccount()">Deactivate Account</div>
 <button class="update-btn" onclick="updateProfile()">Update Profile</button>
-<div style="text-align:center"><button onclick="closeModal('profileModal')" style="background:#333;color:#fff;border:none;padding:8px 20px;border-radius:20px;margin-top:8px">(Go Up)</button></div>
 </div></div></div>
 
 <div class="modal" id="adminLoginModal"><div class="modal-box"><div class="modal-header"><b>🔐 Admin Login</b><span onclick="closeModal('adminLoginModal')" style="cursor:pointer">×</span></div><div class="modal-body">
-<input id="adminPass" type="password" placeholder="Password default: blessman123">
+<input id="adminPass" type="password" placeholder="Password: blessman123">
 <button onclick="adminLogin()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Login as Admin</button>
 </div></div></div>
 
 <div class="modal" id="postModal"><div class="modal-box wide"><div class="modal-header"><b id="postHeader">New Topic</b><span onclick="closeModal('postModal')" style="cursor:pointer">×</span></div><div class="modal-body">
 <input id="pTitle" placeholder="Title"><select id="pCat"></select><textarea id="pBody" rows="8" placeholder="Content"></textarea>
-<button onclick="createPost()" style="background:#003300;color:#fff;padding:12px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Post</button>
+<button onclick="createPost()" style="background:#003300;color:#fff;padding:12px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Post Topic</button>
 </div></div></div>
 
-<div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer">×</span></div><div class="modal-body">
-<input id="rUser" placeholder="Username"><input id="rEmail" placeholder="Email e.g. diamondovie02@gmail.com"><input id="rPass" type="password" placeholder="Password"><input id="rPass2" type="password" placeholder="Confirm Password">
+<div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body">
+<label>Username *</label><input id="rUser" placeholder="Choose username e.g. Daniel">
+<label>Password *</label><input id="rPass" type="password" placeholder="Password min 4 chars">
+<label>Confirm Password *</label><input id="rPass2" type="password" placeholder="Confirm password">
+<div style="font-size:11px;color:#666;margin:8px 0">After Register, you can Edit Profile and Comment. Only Admin can post.</div>
 <button onclick="doRegister()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:8px">Create Account</button>
+<div style="text-align:center;margin-top:10px;font-size:12px">Already have? <span style="color:#003300;text-decoration:underline;cursor:pointer;font-weight:bold" onclick="closeModal('regModal');openModal('loginModal')">Login</span></div>
 </div></div></div>
 
 <div class="modal" id="loginModal"><div class="modal-box"><div class="modal-header"><b>Login</b><span onclick="closeModal('loginModal')" style="cursor:pointer">×</span></div><div class="modal-body">
-<input id="lUser" placeholder="Username"><input id="lPass" type="password" placeholder="Password">
+<label>Username *</label><input id="lUser" placeholder="Username">
+<label>Password *</label><input id="lPass" type="password" placeholder="Password">
 <button onclick="doLogin()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:12px">Login</button>
+<div style="text-align:center;margin-top:10px;font-size:12px">No account? <span style="color:#003300;text-decoration:underline;cursor:pointer;font-weight:bold" onclick="closeModal('loginModal');openModal('regModal')">Register</span></div>
 </div></div></div>
 
 <div id="toast"></div>
@@ -162,9 +159,9 @@ document.getElementById('userLabel').textContent=getUserLabel()+(isAdmin?' (Admi
 if(currentUser||isAdmin){ document.getElementById('profileLink').style.display='inline'; document.getElementById('editProfileLink').style.display='inline'; } else { document.getElementById('profileLink').style.display='none'; document.getElementById('editProfileLink').style.display='none'; }
 }
 function openProfile(){
-if(!currentUser && !isAdmin) return toast('Login first');
-let u = currentUser || {username:'Admin',email:'admin@blessman.com'};
-document.getElementById('pEmailDisplay').textContent=u.email||'diamondovie02@gmail.com';
+if(!currentUser && !isAdmin){ toast('You must Register or Login first to Edit Profile'); openModal('regModal'); return; }
+let u = currentUser || {username:'Admin'};
+document.getElementById('pUserDisplay').textContent=u.username;
 document.getElementById('pDay').value=u.birthDay||'-- Day --';
 document.getElementById('pMonth').value=u.birthMonth||'-- Month --';
 document.getElementById('pYear').value=u.birthYear||'-- Year --';
@@ -175,7 +172,7 @@ document.getElementById('pLocation').value=u.location||'';
 document.getElementById('pYIM').value=u.yim||'';
 document.getElementById('pTwitter').value=u.twitter||'';
 document.getElementById('pFacebook').value=u.facebook||'';
-if(u.picture){ document.getElementById('pPicPreview').innerHTML=`<img src="${u.picture}" style="max-width:100px;border-radius:8px;border:2px solid #2d5a2d">`; }
+if(u.picture){ document.getElementById('pPicPreview').innerHTML=`<img src="${u.picture}" style="max-width:100px;border-radius:8px">`; }
 else document.getElementById('pPicPreview').innerHTML='';
 openModal('profileModal');
 }
@@ -186,7 +183,7 @@ let reader=new FileReader(); reader.onload=e=>{ document.getElementById('pPicPre
 }
 }
 function updateProfile(){
-if(!currentUser && !isAdmin) return;
+if(!currentUser && !isAdmin){ toast('Register first'); return; }
 let tempPic=document.getElementById('pPicPreview').dataset.temp;
 let remove=document.getElementById('pRemovePic').checked;
 let data={
@@ -206,36 +203,31 @@ if(remove) data.picture='';
 let idx=users.findIndex(x=>currentUser && x.username===currentUser.username);
 if(idx>=0){ users[idx]={...users[idx],...data}; currentUser=users[idx]; }
 else if(isAdmin){ currentUser={username:'Admin',...data,picture:tempPic||currentUser?.picture}; }
-else { currentUser={...currentUser,...data}; if(tempPic) currentUser.picture=tempPic; }
+else { currentUser={...currentUser,...data}; }
 save(); closeModal('profileModal'); toast('✅ Profile Updated!');
 }
-function changeEmail(){
-let ne=prompt('Enter new email:',currentUser?.email||'diamondovie02@gmail.com');
-if(ne){ let idx=users.findIndex(x=>currentUser && x.username===currentUser.username); if(idx>=0) users[idx].email=ne; if(currentUser) currentUser.email=ne; save(); document.getElementById('pEmailDisplay').textContent=ne; toast('Email changed to '+ne); }
-}
 function deactivateAccount(){
-if(!confirm('Deactivate your account? This will logout and delete your profile!')) return;
-let idx=users.findIndex(x=>currentUser && x.username===currentUser.username);
-if(idx>=0) users.splice(idx,1);
+if(!confirm('Deactivate account?')) return;
+if(currentUser){ let idx=users.findIndex(x=>x.username===currentUser.username); if(idx>=0) users.splice(idx,1); }
 currentUser=null; isAdmin=false; localStorage.removeItem('isAdmin'); localStorage.removeItem('currentUser'); save(); closeModal('profileModal'); init(); toast('Account deactivated'); showHome();
 }
 function doRegister(){
-let u=document.getElementById('rUser').value.trim(); let e=document.getElementById('rEmail').value.trim(); let p=document.getElementById('rPass').value; let p2=document.getElementById('rPass2').value;
-if(!u||!p) return toast('Enter username & password'); if(p.length<4) return toast('Password 4+ chars'); if(p!==p2) return toast('Passwords no match');
-if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return toast('Username exists');
-let newUser={username:u,email:e||'diamondovie02@gmail.com',password:p};
-users.push(newUser); currentUser=newUser; save(); closeModal('regModal'); init(); toast('✅ Welcome '+u);
+let u=document.getElementById('rUser').value.trim(); let p=document.getElementById('rPass').value; let p2=document.getElementById('rPass2').value;
+if(!u||!p) return toast('Enter username & password'); if(p.length<4) return toast('Password 4+ chars'); if(p!==p2) return toast('No match');
+if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return toast('Username exists, Login');
+let newUser={username:u,password:p};
+users.push(newUser); currentUser=newUser; save(); closeModal('regModal'); init(); toast('✅ Registered! Now you can Edit Profile & Comment'); 
 }
 function doLogin(){
 let u=document.getElementById('lUser').value.trim(); let p=document.getElementById('lPass').value;
 if(!u||!p) return toast('Enter username & password');
 let found=users.find(x=>x.username.toLowerCase()===u.toLowerCase() && x.password===p);
-if(!found){ if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin',email:'admin@blessman.com'}; save(); closeModal('loginModal'); init(); toast('✅ Admin ON'); return; } return toast('Wrong username/password'); }
+if(!found){ if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin'}; save(); closeModal('loginModal'); init(); toast('✅ Admin ON'); return; } return toast('Wrong username/password'); }
 currentUser=found; save(); closeModal('loginModal'); init(); toast('Welcome '+found.username);
 }
 function adminLogin(){
 let p=document.getElementById('adminPass').value;
-if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin',email:'admin@blessman.com'}; save(); closeModal('adminLoginModal'); init(); toast('✅ Admin ON'); }
+if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin'}; save(); closeModal('adminLoginModal'); init(); toast('✅ Admin ON'); }
 else toast('Wrong password! Default blessman123');
 }
 function adminLogout(){ isAdmin=false; localStorage.removeItem('isAdmin'); currentUser=null; localStorage.removeItem('currentUser'); init(); toast('Admin out'); closeModal('adminLoginModal'); }
@@ -252,18 +244,4 @@ if(list.length===0){ html=isAdmin?`<div style="text-align:center;padding:30px"><
 else { list.forEach(t=>{ let i=TOPICS.indexOf(t); html+=`<div class="news-item" onclick="viewTopic(${i})">» <b>${t.title}</b> «<span class="meta">${t.author} • ${timeAgo(t.time)} • ${t.cat} • ${(comments['c_'+i]||[]).length} comments</span></div>`; }); }
 document.getElementById('newsBox').innerHTML=html;
 }
-function viewTopic(idx){ let t=TOPICS[idx]; if(!t) return; currentViewIdx=idx; document.getElementById('vTitle').textContent=t.title; document.getElementById('delBtn').style.display=isAdmin?'inline-block':'none'; let can=currentUser||isAdmin; document.getElementById('vBody').innerHTML=`<div style="font-size:11px;color:#666">${t.author} • ${timeAgo(t.time)}</div><div style="margin:14px 0;white-space:pre-wrap">${t.body}</div><hr><div id="cList"></div>${can?`<textarea id="ct" placeholder="Comment as ${getUserLabel()}..." rows="3" style="width:100%;margin-top:10px"></textarea><button onclick="postComment(${idx})" style="background:#003300;color:#fff;padding:8px 16px;border:none;border-radius:5px;margin-top:8px">Post</button>`:`<div style="background:#fff8c0;padding:10px;border-radius:6px;margin-top:10px;text-align:center">Login to comment</div>`}`; renderComments(idx); openModal('viewModal'); }
-function renderComments(idx){ let id='c_'+idx; let list=comments[id]||[]; document.getElementById('cList').innerHTML=list.map(c=>`<div class="comment"><b>${c.author}</b> • ${timeAgo(c.time)}<br>${c.text}</div>`).join('')||'<div style="font-size:11px;color:#888">No comments</div>'; }
-function postComment(idx){ if(!currentUser && !isAdmin) return toast('Login first'); let txt=document.getElementById('ct').value.trim(); if(!txt) return toast('Write comment'); let id='c_'+idx; if(!comments[id]) comments[id]=[]; comments[id].push({author:getUserLabel(),text:txt,time:Date.now()}); save(); document.getElementById('ct').value=''; renderComments(idx); toast('Comment posted'); }
-function createPost(){ if(!isAdmin) return toast('Only Admin'); let title=document.getElementById('pTitle').value.trim(); let body=document.getElementById('pBody').value.trim(); let cat=document.getElementById('pCat').value; if(!title||!body) return toast('Need Title+Body'); TOPICS.unshift({title:title,cat:cat,author:'Admin',time:Date.now(),body:body}); save(); closeModal('postModal'); document.getElementById('pTitle').value='';document.getElementById('pBody').value=''; renderTopics(); toast('Posted in '+cat); }
-function doSearch(){ if(document.getElementById('homeCard').style.display!=='none'){ showAllTopics(); } else { renderTopics(currentBoard===null); } }
-function openModal(id){document.getElementById(id).classList.add('show'); if(id==='postModal' && !isAdmin){ closeModal(id); openModal('adminLoginModal'); }}
-function closeModal(id){document.getElementById(id).classList.remove('show');}
-function deleteTopic(idx){ if(!isAdmin) return; if(!confirm('Delete?')) return; TOPICS.splice(idx,1); let nc={}; for(let k in comments){ let num=parseInt(k.split('_')[1]); if(num===idx) continue; let n=num>idx?num-1:num; nc['c_'+n]=comments[k]; } comments=nc; save(); closeModal('viewModal'); renderTopics(); toast('Deleted'); }
-function deleteCurrent(){ if(currentViewIdx!==null) deleteTopic(currentViewIdx); }
-function toast(m){let t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',3000);}
-function timeAgo(ts){let s=Math.floor((Date.now()-ts)/1000); if(s<60) return s+'s ago'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago';}
-init();
-</script>
-</body>
-</html>
+function viewTopic(idx){ let t=TOPICS[idx]; if(!t) return; currentViewIdx=idx; document.getElementBy
