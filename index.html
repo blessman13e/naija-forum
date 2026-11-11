@@ -8,14 +8,13 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#111;color:#ddd}
 .header{background:#143314;border-radius:16px;margin:8px;padding:16px 12px;text-align:center;border:1px solid #204020}
-.header h1{font-size:32px;color:#d0e8c0;font-weight:900;text-decoration:line-through;text-decoration-thickness:3px;cursor:pointer}
-.navline{font-size:14px;margin:10px 0;color:#b8d0a8;line-height:1.7}
+.header h1{font-size:32px;color:#d0e8c0;font-weight:900;text-decoration:line-through 3px;cursor:pointer}
+.navline{font-size:14px;margin:10px 0;color:#b8d0a8;line-height:1.9}
 .navline b{color:#fff}
-.navline span{cursor:pointer}
+.navline span{cursor:pointer;padding:2px 4px}
 .stats{font-size:14px;font-weight:bold;margin:8px 0;color:#e0e0e0;line-height:1.5}
-.date{font-size:14px;margin:4px 0;color:#e0e0e0}
 .search-wrap{margin:14px auto;display:flex;gap:8px;justify-content:center;max-width:420px}
-.search-wrap input{flex:1;padding:12px 18px;border-radius:20px;border:none;background:#0a0a0a;color:#fff;outline:none}
+.search-wrap input{flex:1;padding:12px 18px;border-radius:20px;border:none;background:#0a0a0a;color:#fff}
 .search-wrap button{padding:12px 20px;border-radius:20px;border:none;background:#2a2a2a;color:#ccc;cursor:pointer}
 .main{max-width:850px;margin:0 auto;padding:0 8px}
 .card{background:#1e3a1e;border-radius:14px;padding:14px;margin:10px 0;border:1px solid #2a4a2a}
@@ -26,10 +25,8 @@ body{background:#111;color:#ddd}
 .boards span{cursor:pointer;color:#b8d8a8}
 .boards span:hover{color:#fff;text-decoration:underline}
 .news-header{font-size:15px;font-weight:bold;color:#fff;text-align:center;padding:10px;background:#2a5a2a;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.news-list{line-height:1.6}
 .news-item{padding:11px 4px;border-bottom:1px dotted #2a5a2a;font-size:14px;color:#d0f0d0;cursor:pointer}
 .news-item:hover{background:#233d23}
-.news-item b{color:#90ee90}
 .meta{font-size:11px;color:#7aaa7a;display:block;margin-top:3px}
 .back-btn{background:#2a5a2a;color:#fff;border:none;padding:7px 14px;border-radius:12px;cursor:pointer;font-size:12px}
 .admin-btn{background:#ffcc00;color:#000;border:none;padding:7px 14px;border-radius:12px;cursor:pointer;font-size:12px;font-weight:bold;display:none}
@@ -50,28 +47,18 @@ input,textarea,select{border:1px solid #999;border-radius:6px;padding:11px;width
 </style>
 </head>
 <body>
-
 <div class="header">
 <h1 onclick="showHome()">BLESSMAN FORUM</h1>
-<div class="navline">Welcome, <b id="userLabel">Guest</b>: <span onclick="openModal('regModal')">Register</span> • <span onclick="openModal('loginModal')">Login</span> • <span onclick="openModal('regModal')">With Google</span> • <span onclick="showAllTopics()">Trending</span> • <span onclick="showAllTopics()">Recent</span> • <span onclick="showAllTopics()">New</span> <span id="editLink" style="display:none;color:#ffcc00" onclick="openProfile()">• Edit Profile</span> <span id="adminBadge" style="color:#ffcc00;font-weight:bold"></span></div>
-<div class="stats" id="statsLine">Stats: 0 members, 0 topics<br>Date: Loading...</div>
+<div class="navline" id="navLine">Loading...</div>
+<div class="stats" id="statsLine"></div>
 <div class="search-wrap"><input id="q" placeholder=""><button onclick="doSearch()">Search</button></div>
 </div>
-
 <div class="main">
-<div class="card" id="homeCard">
-<div class="card-title">Welcome to the Blessman Forum</div>
-<div class="boards" id="boardList"></div>
+<div class="card" id="homeCard"><div class="card-title">Welcome to the Blessman Forum</div><div class="boards" id="boardList"></div></div>
+<div class="card" id="topicCard" style="display:none"><div class="news-header"><span id="boardTitle"></span><span><button class="back-btn" onclick="showHome()">← Boards</button> <button class="admin-btn" id="newTopicBtn" onclick="openModal('postModal')">+ New Topic</button></span></div><div class="news-list" id="newsBox"></div></div>
 </div>
-<div class="card" id="topicCard" style="display:none">
-<div class="news-header"><span id="boardTitle">Politics</span> <span><button class="back-btn" onclick="showHome()">← Boards</button> <button class="admin-btn" id="newTopicBtn" onclick="openModal('postModal')">+ New Topic</button></span></div>
-<div class="news-list" id="newsBox"></div>
-</div>
-</div>
-
 <div class="modal" id="viewModal"><div class="modal-box wide"><div class="modal-header"><b id="vTitle" style="flex:1"></b><span onclick="closeModal('viewModal')" style="cursor:pointer;font-size:24px">×</span></div><div class="modal-body" id="vBody"></div></div></div>
-
-<div class="modal" id="profileModal"><div class="modal-box profile"><div class="modal-header"><b>Edit My Profile</b><span onclick="closeModal('profileModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body">
+<div class="modal" id="profileModal"><div class="modal-box profile"><div class="modal-header"><b>Edit My Profile</b><span onclick="closeModal('profileModal')" style="cursor:pointer">×</span></div><div class="modal-body">
 <div style="text-align:center;font-size:12px;color:#8cc48c">Blessman Forum › My profile › Edit My Profile</div>
 <div style="font-size:13px;margin:10px 0"><b>Username:</b> <span id="pUserDisplay" style="color:#ffcc00"></span></div>
 <label>Birthday:</label><div class="row"><select id="pDay"><option>-- Day --</option></select><select id="pMonth"><option>-- Month --</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></div><select id="pYear" style="max-width:130px;margin:8px 0"><option>-- Year --</option></select>
@@ -83,13 +70,11 @@ input,textarea,select{border:1px solid #999;border-radius:6px;padding:11px;width
 <div style="text-align:center;margin:14px 0;color:#7ac0c0;cursor:pointer;text-decoration:underline" onclick="deactivateAccount()">Deactivate Account</div>
 <button onclick="updateProfile()" style="background:#2a5a2a;color:#fff;padding:10px 25px;border-radius:20px;border:none;display:block;margin:0 auto;font-weight:bold">Update Profile</button>
 </div></div></div>
-
-<div class="modal" id="adminLoginModal"><div class="modal-box"><div class="modal-header"><b>Admin Login</b><span onclick="closeModal('adminLoginModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="adminPass" type="password" placeholder="blessman123"><button onclick="adminLogin()" style="background:#143314;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Login</button></div></div></div>
+<div class="modal" id="adminLoginModal"><div class="modal-box"><div class="modal-header"><b>Admin Login</b><span onclick="closeModal('adminLoginModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="adminPass" type="password" placeholder="blessman123"><button onclick="adminLogin()" style="background:#143314;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Login as Admin</button></div></div></div>
 <div class="modal" id="postModal"><div class="modal-box wide"><div class="modal-header"><b id="postHeader">New Topic</b><span onclick="closeModal('postModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="pTitle" placeholder="Title"><select id="pCat"></select><textarea id="pBody" rows="8" placeholder="Content"></textarea><button onclick="createPost()" style="background:#143314;color:#fff;padding:12px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Post</button></div></div></div>
-<div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="rUser" placeholder="Username"><input id="rPass" type="password" placeholder="Password"><input id="rPass2" type="password" placeholder="Confirm Password"><button onclick="doRegister()" style="background:#143314;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:8px">Create Account</button><div style="text-align:center;margin-top:8px;font-size:11px">Must Register before Edit Profile — No Email</div></div></div></div>
+<div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="rUser" placeholder="Username"><input id="rPass" type="password" placeholder="Password"><input id="rPass2" type="password" placeholder="Confirm Password"><button onclick="doRegister()" style="background:#143314;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:8px">Create Account</button><div style="text-align:center;margin-top:8px;font-size:11px">No Email Needed — Must Register to Edit Profile</div></div></div></div>
 <div class="modal" id="loginModal"><div class="modal-box"><div class="modal-header"><b>Login</b><span onclick="closeModal('loginModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="lUser" placeholder="Username"><input id="lPass" type="password" placeholder="Password"><button onclick="doLogin()" style="background:#143314;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:12px">Login</button></div></div></div>
 <div id="toast"></div>
-
 <script>
 const boardData={
 "Nairaland General":["Politics","Crime","Romance","Jobs/Vacancies","Career","Business","Investment","NYSC","Education","Autos","Car Talk","Properties","Health","Travel","Family","Culture","Christianity Etc","Islam","Food","Diaries","Nairaland Ads","Pets","Agriculture"],
@@ -103,14 +88,22 @@ let isAdmin=localStorage.getItem('isAdmin')==='true';
 let ADMIN_PASS='blessman123';
 let TOPICS=JSON.parse(localStorage.getItem('bless_topics')||'[]');
 let comments=JSON.parse(localStorage.getItem('bless_comments')||'{}');
-function save(){localStorage.setItem('bless_topics',JSON.stringify(TOPICS));localStorage.setItem('bless_comments',JSON.stringify(comments));localStorage.setItem('bless_users',JSON.stringify(users));localStorage.setItem('currentUser',JSON.stringify(currentUser));}
-function getLabel(){ if(isAdmin) return 'Admin'; if(currentUser) return currentUser.username; return 'Guest'; }
+function save(){localStorage.setItem('bless_topics',JSON.stringify(TOPICS));localStorage.setItem('bless_comments',JSON.stringify(comments));localStorage.setItem('bless_users',JSON.stringify(users));localStorage.setItem('currentUser',JSON.stringify(currentUser));localStorage.setItem('isAdmin',isAdmin?'true':'false');}
+function getLabel(){if(isAdmin) return 'Admin'; if(currentUser) return currentUser.username; return 'Guest';}
+function isLogged(){return !!(currentUser||isAdmin);}
+function renderNav(){
+if(!isLogged()){
+document.getElementById('navLine').innerHTML=`Welcome, <b>Guest</b>: <span onclick="openModal('regModal')">Register</span> • <span onclick="openModal('loginModal')">Login</span> • <span onclick="openModal('regModal')">With Google</span> • <span onclick="showAllTopics()">Trending</span> • <span onclick="showAllTopics()">Recent</span> • <span onclick="showAllTopics()">New</span>`;
+}else{
+let name=getLabel(); let tag=isAdmin?' (Admin)':'';
+document.getElementById('navLine').innerHTML=`Welcome, <b>${name}${tag}</b>: <span onclick="doLogout()" style="color:#ff7777;font-weight:bold">Logout</span> • <span onclick="showAllTopics()">Trending</span> • <span onclick="showAllTopics()">Recent</span> • <span onclick="showAllTopics()">New</span> • <span onclick="openProfile()" style="color:#ffcc00;font-weight:bold">Edit Profile</span><br><span style="color:#ffcc00;font-weight:bold">${isAdmin?'🔐 Admin Mode ON':''}</span>`;
+}
+}
 function init(){
-document.getElementById('userLabel').textContent=getLabel()+(isAdmin?' (Admin)':'');
+renderNav();
 let now=new Date();
 let dateStr=now.toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' at '+now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
-let m=users.length; let t=TOPICS.length;
-document.getElementById('statsLine').innerHTML=`Stats: ${m} ${m===1?'member':'members'}, ${t} ${t===1?'topic':'topics'}.<br>Date: ${dateStr}`;
+document.getElementById('statsLine').innerHTML=`Stats: ${users.length} ${users.length===1?'member':'members'}, ${TOPICS.length} ${TOPICS.length===1?'topic':'topics'}.<br>Date: ${dateStr}`;
 let html=''; let opts='';
 for(let sec in boardData){
 html+=`<div class="line"><b>${sec}:</b> ${boardData[sec].map(b=>`<span onclick="openBoard('${b.replace(/'/g,"\\'")}')">${b}</span>`).join(', ')}</div>`;
@@ -118,62 +111,31 @@ boardData[sec].forEach(b=>opts+=`<option value="${b}">${b}</option>`);
 }
 document.getElementById('boardList').innerHTML=html;
 document.getElementById('pCat').innerHTML=opts;
-let d=document.getElementById('pDay'); for(let i=1;i<=31;i++){ let o=document.createElement('option'); o.text=i; o.value=i; d.appendChild(o); }
-let y=document.getElementById('pYear'); for(let i=2026;i>=1950;i--){ let o=document.createElement('option'); o.text=i; o.value=i; y.appendChild(o); }
-if(currentUser||isAdmin) document.getElementById('editLink').style.display='inline'; else document.getElementById('editLink').style.display='none';
-if(isAdmin){ document.getElementById('newTopicBtn').classList.add('show'); document.getElementById('adminBadge').textContent='🔐 Admin'; }
+let d=document.getElementById('pDay'); d.innerHTML='<option>-- Day --</option>'; for(let i=1;i<=31;i++){let o=document.createElement('option');o.value=i;o.text=i;d.appendChild(o);}
+let y=document.getElementById('pYear'); y.innerHTML='<option>-- Year --</option>'; for(let i=2026;i>=1950;i--){let o=document.createElement('option');o.value=i;o.text=i;y.appendChild(o);}
+document.getElementById('newTopicBtn').classList.toggle('show',isAdmin);
 }
-function openProfile(){
-if(!currentUser && !isAdmin){ toast('Register first'); openModal('regModal'); return; }
-let u=currentUser||{username:'Admin'};
-document.getElementById('pUserDisplay').textContent=u.username;
-document.getElementById('pDay').value=u.birthDay||'-- Day --';
-document.getElementById('pMonth').value=u.birthMonth||'-- Month --';
-document.getElementById('pYear').value=u.birthYear||'-- Year --';
-document.getElementById('pGender').value=u.gender||'';
-document.getElementById('pText').value=u.personalText||'';
-document.getElementById('pSig').value=u.signature||'';
-document.getElementById('pLocation').value=u.location||'';
-document.getElementById('pYIM').value=u.yim||'';
-document.getElementById('pTwitter').value=u.twitter||'';
-if(u.picture) document.getElementById('pPicPreview').innerHTML=`<img src="${u.picture}" style="max-width:90px;border-radius:8px">`; else document.getElementById('pPicPreview').innerHTML='';
-openModal('profileModal');
-}
-function previewPic(inp){ if(inp.files[0]){ document.getElementById('pFileName').textContent=inp.files[0].name; let r=new FileReader(); r.onload=e=>{ document.getElementById('pPicPreview').innerHTML=`<img src="${e.target.result}" style="max-width:90px">`; document.getElementById('pPicPreview').dataset.temp=e.target.result; }; r.readAsDataURL(inp.files[0]); } }
-function updateProfile(){
-let temp=document.getElementById('pPicPreview').dataset.temp; let rem=document.getElementById('pRemovePic').checked;
-let data={birthDay:document.getElementById('pDay').value,birthMonth:document.getElementById('pMonth').value,birthYear:document.getElementById('pYear').value,gender:document.getElementById('pGender').value,personalText:document.getElementById('pText').value,signature:document.getElementById('pSig').value,location:document.getElementById('pLocation').value,yim:document.getElementById('pYIM').value,twitter:document.getElementById('pTwitter').value};
-if(temp && !rem) data.picture=temp; if(rem) data.picture='';
-let idx=users.findIndex(x=>currentUser && x.username===currentUser.username);
-if(idx>=0){ users[idx]={...users[idx],...data}; currentUser=users[idx]; } else { currentUser={...currentUser,...data}; }
-save(); closeModal('profileModal'); toast('✅ Profile Updated');
-}
-function deactivateAccount(){ if(!confirm('Deactivate?')) return; if(currentUser){ let idx=users.findIndex(x=>x.username===currentUser.username); if(idx>=0) users.splice(idx,1); } currentUser=null; isAdmin=false; localStorage.removeItem('isAdmin'); localStorage.removeItem('currentUser'); save(); closeModal('profileModal'); init(); toast('Deactivated'); }
-function doRegister(){ let u=document.getElementById('rUser').value.trim(); let p=document.getElementById('rPass').value; let p2=document.getElementById('rPass2').value; if(!u||!p) return toast('Enter username & password'); if(p!==p2) return toast('No match'); if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return toast('Username exists'); let nu={username:u,password:p}; users.push(nu); currentUser=nu; save(); closeModal('regModal'); init(); toast('✅ Registered! Now Edit Profile'); }
-function doLogin(){ let u=document.getElementById('lUser').value.trim(); let p=document.getElementById('lPass').value; if(!u||!p) return toast('Enter both'); let f=users.find(x=>x.username.toLowerCase()===u.toLowerCase() && x.password===p); if(!f){ if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin'}; save(); closeModal('loginModal'); init(); toast('✅ Admin ON'); return; } return toast('Wrong'); } currentUser=f; save(); closeModal('loginModal'); init(); toast('Welcome '+f.username); }
-function adminLogin(){ let p=document.getElementById('adminPass').value; if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin'}; save(); closeModal('adminLoginModal'); init(); toast('✅ Admin ON'); } else toast('Wrong'); }
-function openBoard(b){ currentBoard=b; document.getElementById('homeCard').style.display='none'; document.getElementById('topicCard').style.display='block'; document.getElementById('boardTitle').textContent=b; document.getElementById('pCat').value=b; renderTopics(); }
-function showHome(){ document.getElementById('homeCard').style.display='block'; document.getElementById('topicCard').style.display='none'; currentBoard=null; document.getElementById('q').value=''; }
-function showAllTopics(){ currentBoard=null; document.getElementById('homeCard').style.display='none'; document.getElementById('topicCard').style.display='block'; document.getElementById('boardTitle').textContent='All Topics'; renderTopics(true); }
-function renderTopics(all=false){
-let q=document.getElementById('q').value.toLowerCase();
-let list=[...TOPICS];
-if(!all && currentBoard) list=list.filter(t=>t.cat===currentBoard);
-if(q) list=list.filter(t=>t.title.toLowerCase().includes(q));
-let html='';
-if(list.length===0){ html=isAdmin?`<div style="text-align:center;padding:30px">No topics in <b>${currentBoard||'All'}</b><br><button onclick="openModal('postModal')" style="background:#ffcc00;color:#000;padding:10px 22px;border:none;border-radius:20px;font-weight:bold;margin-top:12px">+ Post First Topic</button></div>`:`<div style="text-align:center;padding:30px;color:#888">No topics in <b>${currentBoard||'All'}</b></div>`; }
-else { list.forEach(t=>{ let i=TOPICS.indexOf(t); html+=`<div class="news-item" onclick="viewTopic(${i})">» <b>${t.title}</b> «<span class="meta">${t.author} • ${timeAgo(t.time)} • ${t.cat}</span></div>`; }); }
-document.getElementById('newsBox').innerHTML=html;
-}
-function viewTopic(idx){ let t=TOPICS[idx]; document.getElementById('vTitle').textContent=t.title; let can=currentUser||isAdmin; document.getElementById('vBody').innerHTML=`<div style="font-size:11px;color:#666">${t.author} • ${timeAgo(t.time)}</div><div style="margin:14px 0;white-space:pre-wrap">${t.body}</div><hr><div id="cList"></div>${can?`<textarea id="ct" rows="3" style="width:100%;margin-top:10px"></textarea><button onclick="postComment(${idx})" style="background:#143314;color:#fff;padding:8px 16px;border:none;border-radius:5px;margin-top:8px">Post</button>`:`<div style="background:#fff8c0;padding:10px;border-radius:6px;margin-top:10px;text-align:center">Must Register to comment</div>`}`; renderComments(idx); openModal('viewModal'); }
-function renderComments(idx){ let id='c_'+idx; let list=comments[id]||[]; document.getElementById('cList').innerHTML=list.map(c=>`<div style="background:#e8e8d0;padding:8px;margin:6px 0;border-left:3px solid #2d5a2d;color:#000"><b>${c.author}</b><br>${c.text}</div>`).join('')||'No comments'; }
-function postComment(idx){ if(!currentUser && !isAdmin) return toast('Register first'); let txt=document.getElementById('ct').value.trim(); if(!txt) return toast('Write comment'); let id='c_'+idx; if(!comments[id]) comments[id]=[]; comments[id].push({author:getLabel(),text:txt,time:Date.now()}); save(); document.getElementById('ct').value=''; renderComments(idx); init(); toast('Posted'); }
-function createPost(){ if(!isAdmin) return toast('Only Admin'); let title=document.getElementById('pTitle').value.trim(); let body=document.getElementById('pBody').value.trim(); let cat=document.getElementById('pCat').value; if(!title||!body) return toast('Need Title+Body'); TOPICS.unshift({title:title,cat:cat,author:'Admin',time:Date.now(),body:body}); save(); closeModal('postModal'); document.getElementById('pTitle').value='';document.getElementById('pBody').value=''; renderTopics(); init(); toast('Posted'); }
-function doSearch(){ if(document.getElementById('homeCard').style.display!=='none'){ showAllTopics(); } else { renderTopics(currentBoard===null); } }
-function openModal(id){ if((id==='profileModal') && !currentUser && !isAdmin){ toast('Register before Edit Profile'); openModal('regModal'); return; } document.getElementById(id).classList.add('show'); if(id==='postModal' && !isAdmin){ closeModal(id); openModal('adminLoginModal'); } }
+function openProfile(){if(!isLogged()){toast('You must Register first');openModal('regModal');return;}let u=currentUser||{username:'Admin'};document.getElementById('pUserDisplay').textContent=u.username;document.getElementById('pDay').value=u.birthDay||'-- Day --';document.getElementById('pMonth').value=u.birthMonth||'-- Month --';document.getElementById('pYear').value=u.birthYear||'-- Year --';document.getElementById('pGender').value=u.gender||'';document.getElementById('pText').value=u.personalText||'';document.getElementById('pSig').value=u.signature||'';document.getElementById('pLocation').value=u.location||'';document.getElementById('pYIM').value=u.yim||'';document.getElementById('pTwitter').value=u.twitter||'';if(u.picture) document.getElementById('pPicPreview').innerHTML=`<img src="${u.picture}" style="max-width:90px;border-radius:8px">`;else document.getElementById('pPicPreview').innerHTML='';openModal('profileModal');}
+function previewPic(inp){if(inp.files[0]){document.getElementById('pFileName').textContent=inp.files[0].name;let r=new FileReader();r.onload=e=>{document.getElementById('pPicPreview').innerHTML=`<img src="${e.target.result}" style="max-width:90px">`;document.getElementById('pPicPreview').dataset.temp=e.target.result;};r.readAsDataURL(inp.files[0]);}}
+function updateProfile(){let temp=document.getElementById('pPicPreview').dataset.temp;let rem=document.getElementById('pRemovePic').checked;let data={birthDay:document.getElementById('pDay').value,birthMonth:document.getElementById('pMonth').value,birthYear:document.getElementById('pYear').value,gender:document.getElementById('pGender').value,personalText:document.getElementById('pText').value,signature:document.getElementById('pSig').value,location:document.getElementById('pLocation').value,yim:document.getElementById('pYIM').value,twitter:document.getElementById('pTwitter').value};if(temp&&!rem) data.picture=temp;if(rem) data.picture='';let idx=users.findIndex(x=>currentUser&&x.username===currentUser.username);if(idx>=0){users[idx]={...users[idx],...data};currentUser=users[idx];}else{currentUser={...currentUser,...data};}save();closeModal('profileModal');toast('✅ Profile Updated');}
+function deactivateAccount(){if(!confirm('Deactivate?')) return;if(currentUser){let idx=users.findIndex(x=>x.username===currentUser.username);if(idx>=0) users.splice(idx,1);}currentUser=null;isAdmin=false;save();localStorage.removeItem('currentUser');localStorage.removeItem('isAdmin');closeModal('profileModal');init();showHome();toast('Deactivated');}
+function doRegister(){let u=document.getElementById('rUser').value.trim();let p=document.getElementById('rPass').value;let p2=document.getElementById('rPass2').value;if(!u||!p) return toast('Enter username & password');if(p!==p2) return toast('Passwords no match');if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return toast('Username exists, Login');let nu={username:u,password:p};users.push(nu);currentUser=nu;isAdmin=false;save();closeModal('regModal');init();toast('✅ Registered as '+u+'! Now you are Logged in');}
+function doLogin(){let u=document.getElementById('lUser').value.trim();let p=document.getElementById('lPass').value;if(!u||!p) return toast('Enter both');let f=users.find(x=>x.username.toLowerCase()===u.toLowerCase()&&x.password===p);if(!f){if(p===ADMIN_PASS){isAdmin=true;currentUser={username:'Admin'};save();closeModal('loginModal');init();toast('✅ Admin ON');return;}return toast('Wrong username/password');}currentUser=f;isAdmin=false;save();closeModal('loginModal');init();toast('Welcome '+f.username);}
+function adminLogin(){let p=document.getElementById('adminPass').value;if(p===ADMIN_PASS){isAdmin=true;currentUser={username:'Admin'};save();closeModal('adminLoginModal');init();toast('✅ Admin ON');}else toast('Wrong password');}
+function doLogout(){currentUser=null;isAdmin=false;localStorage.removeItem('currentUser');localStorage.removeItem('isAdmin');save();init();showHome();toast('Logged out — now Guest');}
+function openBoard(b){currentBoard=b;document.getElementById('homeCard').style.display='none';document.getElementById('topicCard').style.display='block';document.getElementById('boardTitle').textContent=b;document.getElementById('pCat').value=b;renderTopics();}
+function showHome(){document.getElementById('homeCard').style.display='block';document.getElementById('topicCard').style.display='none';currentBoard=null;document.getElementById('q').value='';}
+function showAllTopics(){currentBoard=null;document.getElementById('homeCard').style.display='none';document.getElementById('topicCard').style.display='block';document.getElementById('boardTitle').textContent='All Topics';renderTopics(true);}
+function renderTopics(all=false){let q=document.getElementById('q').value.toLowerCase();let list=[...TOPICS];if(!all&&currentBoard) list=list.filter(t=>t.cat===currentBoard);if(q) list=list.filter(t=>t.title.toLowerCase().includes(q));let html='';if(list.length===0){html=isAdmin?`<div style="text-align:center;padding:30px">No topics in <b>${currentBoard||'All'}</b><br><button onclick="openModal('postModal')" style="background:#ffcc00;color:#000;padding:10px 22px;border:none;border-radius:20px;font-weight:bold;margin-top:12px">+ Post First Topic</button></div>`:`<div style="text-align:center;padding:30px;color:#888">No topics in <b>${currentBoard||'All'}</b></div>`;}else{list.forEach(t=>{let i=TOPICS.indexOf(t);html+=`<div class="news-item" onclick="viewTopic(${i})">» <b>${t.title}</b> «<span class="meta">${t.author} • ${timeAgo(t.time)} • ${t.cat}</span></div>`;});}document.getElementById('newsBox').innerHTML=html;}
+function viewTopic(idx){let t=TOPICS[idx];document.getElementById('vTitle').textContent=t.title;let can=isLogged();document.getElementById('vBody').innerHTML=`<div style="font-size:11px;color:#666">${t.author} • ${timeAgo(t.time)}</div><div style="margin:14px 0;white-space:pre-wrap">${t.body}</div><hr><div id="cList"></div>${can?`<textarea id="ct" rows="3" style="width:100%;margin-top:10px"></textarea><button onclick="postComment(${idx})" style="background:#143314;color:#fff;padding:8px 16px;border:none;border-radius:5px;margin-top:8px">Post Comment</button>`:`<div style="background:#fff8c0;padding:10px;border-radius:6px;margin-top:10px;text-align:center">Register to comment</div>`}`;renderComments(idx);openModal('viewModal');}
+function renderComments(idx){let id='c_'+idx;let list=comments[id]||[];document.getElementById('cList').innerHTML=list.map(c=>`<div style="background:#e8e8d0;padding:8px;margin:6px 0;border-left:3px solid #2d5a2d;color:#000"><b>${c.author}</b><br>${c.text}</div>`).join('')||'No comments';}
+function postComment(idx){if(!isLogged()) return toast('Register first');let txt=document.getElementById('ct').value.trim();if(!txt) return toast('Write comment');let id='c_'+idx;if(!comments[id]) comments[id]=[];comments[id].push({author:getLabel(),text:txt,time:Date.now()});save();document.getElementById('ct').value='';renderComments(idx);init();toast('Posted');}
+function createPost(){if(!isAdmin) return toast('Only Admin');let title=document.getElementById('pTitle').value.trim();let body=document.getElementById('pBody').value.trim();let cat=document.getElementById('pCat').value;if(!title||!body) return toast('Need Title+Body');TOPICS.unshift({title:title,cat:cat,author:'Admin',time:Date.now(),body:body});save();closeModal('postModal');document.getElementById('pTitle').value='';document.getElementById('pBody').value='';renderTopics();init();toast('Posted');}
+function doSearch(){if(document.getElementById('homeCard').style.display!=='none'){showAllTopics();}else{renderTopics(currentBoard===null);}}
+function openModal(id){if(id==='profileModal'&&!isLogged()){toast('Register first');openModal('regModal');return;}document.getElementById(id).classList.add('show');if(id==='postModal'&&!isAdmin){closeModal(id);openModal('adminLoginModal');}}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
-function toast(m){let t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',3000);}
-function timeAgo(ts){let s=Math.floor((Date.now()-ts)/1000); if(s<60) return s+'s ago'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago';}
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
+function timeAgo(ts){let s=Math.floor((Date.now()-ts)/1000);if(s<60) return s+'s ago';if(s<3600) return Math.floor(s/60)+'m ago';if(s<86400) return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
 init();
 </script>
 </body>
