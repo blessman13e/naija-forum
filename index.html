@@ -8,11 +8,10 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Verdana,Arial,sans-serif}
 body{background:#000;color:#c8e6c8}
 .header{background:#003300;border-bottom:4px solid #1a5c1a;padding:14px 8px;text-align:center;position:sticky;top:0;z-index:20}
-.header h1{font-size:28px;color:#fff;letter-spacing:1px;font-weight:bold;cursor:pointer;text-decoration:none}
-.navline{font-size:13px;margin:8px 0;color:#c8e6c8;line-height:1.8}
+.header h1{font-size:28px;color:#fff;font-weight:bold;cursor:pointer}
+.navline{font-size:12px;margin:8px 0;color:#c8e6c8;line-height:1.8}
 .navline b{color:#fff}
 .navline span{cursor:pointer;padding:3px 6px}
-.navline span:hover{color:#fff;text-decoration:underline}
 .search-box{margin:10px auto;display:flex;gap:6px;max-width:400px;justify-content:center}
 .search-box input{flex:1;padding:9px 16px;border-radius:20px;border:1px solid #2d5a2d;background:#0a1a0a;color:#fff;max-width:250px}
 .search-box button{padding:9px 18px;border-radius:20px;border:none;background:#222;color:#fff;cursor:pointer}
@@ -21,12 +20,12 @@ body{background:#000;color:#c8e6c8}
 .welcome-title{font-size:16px;font-weight:bold;color:#e8f5c8;text-align:center;margin-bottom:14px}
 .boards{font-size:14px;line-height:2.1;color:#8cc48c}
 .boards .sec{margin-bottom:18px}
-.boards b{color:#fff;display:block;margin-bottom:5px;font-size:15px}
-.boards span{cursor:pointer;color:#a8d8a8;display:inline-block;margin-right:14px;padding:2px 4px;border-radius:4px}
-.boards span:hover{color:#fff;background:#1a4d1a;text-decoration:none;font-weight:bold}
+.boards b{color:#fff;display:block;margin-bottom:5px}
+.boards span{cursor:pointer;color:#a8d8a8;display:inline-block;margin-right:14px;padding:2px 4px}
+.boards span:hover{color:#fff;background:#1a4d1a;font-weight:bold}
 .news-header{font-size:15px;font-weight:bold;color:#fff;text-align:center;padding:10px;background:#1a4d1a;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.news-list{line-height:1.6;min-height:80px}
-.news-item{padding:11px 4px;border-bottom:1px dotted #1a4d1a;font-size:14px;color:#d0f0d0;cursor:pointer;position:relative}
+.news-list{line-height:1.6}
+.news-item{padding:11px 4px;border-bottom:1px dotted #1a4d1a;font-size:14px;color:#d0f0d0;cursor:pointer}
 .news-item:hover{background:#142e14}
 .news-item b{color:#90ee90;font-weight:normal}
 .meta{font-size:10px;color:#7aaa7a;display:block;margin-top:4px}
@@ -34,21 +33,32 @@ body{background:#000;color:#c8e6c8}
 .admin-btn{background:#ffcc00;color:#000;border:none;padding:7px 14px;border-radius:12px;cursor:pointer;font-size:12px;font-weight:bold;display:none}
 .admin-btn.show{display:inline-block}
 .del-btn{background:#660000;color:#fff;border:none;padding:4px 10px;border-radius:10px;cursor:pointer;font-size:10px;margin-left:8px}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99;align-items:center;justify-content:center;padding:10px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.93);z-index:99;align-items:center;justify-content:center;padding:10px}
 .modal.show{display:flex}
-.modal-box{background:#f5f5e5;color:#000;width:100%;max-width:700px;border-radius:10px;max-height:92vh;overflow:auto}
+.modal-box{background:#f5f5e5;color:#000;width:100%;max-width:450px;border-radius:10px;max-height:92vh;overflow:auto}
+.modal-box.wide{max-width:700px}
+.modal-box.profile{max-width:500px;background:#0e2e0e;color:#c8e6c8;border:2px solid #1a4d1a}
 .modal-header{background:#003300;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center}
-.modal-body{padding:14px;font-size:13px;line-height:1.6}
-.comment{background:#e8e8d0;padding:9px;margin:7px 0;border-left:3px solid #2d5a2d;font-size:12px;border-radius:3px}
-#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#003300;color:#fff;padding:10px 20px;border-radius:20px;display:none;z-index:200;font-size:13px;box-shadow:0 2px 10px rgba(0,0,0,0.5)}
-input,textarea,select{border:1px solid #999;border-radius:6px;padding:10px;width:100%;margin:6px 0;font-size:14px}
+.modal-body{padding:16px;font-size:13px;line-height:1.6}
+.profile .modal-header{background:#1a4d1a}
+.profile .modal-body{background:#0e2e0e}
+.profile label{color:#c8e6c8;font-size:13px;display:block;margin-top:12px;text-align:left}
+.profile input,.profile select{padding:10px;background:#1a3d1a;color:#fff;border:1px solid #2d5a2d;border-radius:20px;width:100%;margin-top:4px}
+.profile .row{display:flex;gap:8px}
+.profile .file-row{display:flex;align-items:center;gap:10px;margin-top:8px}
+.profile .file-btn{background:#e0e0e0;color:#000;padding:6px 12px;border-radius:4px;border:1px solid #999;cursor:pointer;font-size:13px}
+.profile .deact{color:#7ac0c0;text-align:center;margin:14px 0;cursor:pointer;text-decoration:underline;font-size:14px}
+.profile .update-btn{background:#1a4d1a;color:#c8e6c8;border:1px solid #2d5a2d;padding:10px 25px;border-radius:20px;cursor:pointer;display:block;margin:14px auto;font-weight:bold}
+.comment{background:#e8e8d0;padding:9px;margin:7px 0;border-left:3px solid #2d5a2d;font-size:12px;border-radius:3px;color:#000}
+#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#003300;color:#fff;padding:10px 20px;border-radius:20px;display:none;z-index:200;font-size:13px}
+input,textarea,select{border:1px solid #999;border-radius:6px;padding:11px;width:100%;margin:7px 0;font-size:14px}
 .date{font-size:12px;color:#9ccc9c;margin-top:6px}
 </style>
 </head>
 <body>
 <div class="header">
 <h1 onclick="showHome()">BLESSMAN FORUM</h1>
-<div class="navline">Welcome, <b id="userLabel">Guest</b>: <span onclick="openModal('regModal')">Register</span> • <span onclick="openModal('loginModal')">Login</span> • <span onclick="showAllTopics()">Trending</span> • <span onclick="showAllTopics()">Recent</span> <span id="adminBadge" style="color:#ffcc00;font-size:11px;font-weight:bold"></span></div>
+<div class="navline">Welcome, <b id="userLabel">Guest</b>: <span onclick="openModal('regModal')">Register</span> • <span onclick="openModal('loginModal')">Login</span> • <span onclick="showAllTopics()">Trending</span> • <span id="profileLink" style="display:none" onclick="openProfile()">My Profile</span> • <span id="editProfileLink" style="display:none;color:#ffcc00" onclick="openProfile()">Edit Profile</span> <span id="adminBadge" style="color:#ffcc00;font-size:11px;font-weight:bold"></span></div>
 <div class="date" id="dateStr"></div>
 <div class="search-box"><input id="q" placeholder="Search topics..."><button onclick="doSearch()">Search</button></div>
 </div>
@@ -59,127 +69,198 @@ input,textarea,select{border:1px solid #999;border-radius:6px;padding:10px;width
 <div class="boards" id="boardList"></div>
 <div style="text-align:center;margin-top:18px;font-size:12px;padding:10px;background:#001a00;border-radius:8px">
 <span style="color:#ffcc00;cursor:pointer;text-decoration:underline;font-weight:bold" onclick="openModal('adminLoginModal')">🔐 Admin Login</span>
-<span style="color:#888"> — Only Admin can post news. Guests can comment.</span>
 </div>
 </div>
-
 <div class="card" id="topicCard" style="display:none">
 <div class="news-header"><span id="boardTitle">Politics</span> <span><button class="back-btn" onclick="showHome()">← Boards</button> <button class="admin-btn" id="newTopicBtn" onclick="openModal('postModal')">+ New Topic</button></span></div>
 <div class="news-list" id="newsBox"></div>
 </div>
 </div>
 
-<div class="modal" id="viewModal"><div class="modal-box"><div class="modal-header"><b id="vTitle" style="flex:1"></b><span style="display:flex;gap:8px;align-items:center"><button id="delBtn" onclick="deleteCurrent()" style="background:#cc0000;color:#fff;border:none;padding:5px 10px;border-radius:8px;font-size:11px;display:none">Delete</button><span onclick="closeModal('viewModal')" style="cursor:pointer;font-size:24px;margin-left:8px">×</span></span></div><div class="modal-body" id="vBody"></div></div></div>
+<div class="modal" id="viewModal"><div class="modal-box wide"><div class="modal-header"><b id="vTitle" style="flex:1"></b><span style="display:flex;gap:8px;align-items:center"><button id="delBtn" onclick="deleteCurrent()" style="background:#cc0000;color:#fff;border:none;padding:5px 10px;border-radius:8px;font-size:11px;display:none">Delete</button><span onclick="closeModal('viewModal')" style="cursor:pointer;font-size:24px">×</span></span></div><div class="modal-body" id="vBody"></div></div></div>
 
-<div class="modal" id="adminLoginModal"><div class="modal-box"><div class="modal-header"><b>🔐 Admin Login - Only You</b><span onclick="closeModal('adminLoginModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body">
-<div style="background:#fff8c0;padding:10px;font-size:12px;border-radius:6px;margin-bottom:12px">Enter password to become Admin. Default: <b>blessman123</b><br>You can change password inside code later.</div>
-<input id="adminPass" type="password" placeholder="Admin Password">
-<button onclick="adminLogin()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px;font-size:14px">Login as Admin</button>
-<div style="margin-top:14px;text-align:center"><span onclick="adminLogout()" style="font-size:12px;color:#cc0000;cursor:pointer;text-decoration:underline">Logout Admin</span></div>
+<!-- EDIT PROFILE MODAL LIKE NAIRALAND -->
+<div class="modal" id="profileModal"><div class="modal-box profile"><div class="modal-header"><b>Edit My Profile</b><span onclick="closeModal('profileModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body">
+<div style="text-align:center;font-size:12px;color:#8cc48c;margin-bottom:10px">Blessman Forum › My profile › Edit My Profile</div>
+<div style="font-size:13px;margin-bottom:12px"><b>Email:</b> <span id="pEmailDisplay"></span> <span style="color:#7ac0c0;cursor:pointer;text-decoration:underline" onclick="changeEmail()">Change Email</span></div>
+
+<label>Birthday:</label>
+<div class="row">
+<select id="pDay"><option>-- Day --</option></select>
+<select id="pMonth"><option>-- Month --</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+</div>
+<select id="pYear" style="max-width:120px;margin:8px auto;display:block"><option>-- Year --</option></select>
+
+<label>Gender:</label><select id="pGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
+<label>Personal text:</label><input id="pText" placeholder="">
+<label>Signature:</label><input id="pSig" placeholder="">
+<label>Picture:</label>
+<div class="file-row">
+<label class="file-btn"><input type="file" id="pPicFile" accept="image/*" style="display:none" onchange="previewPic(this)">Choose File</label>
+<span id="pFileName" style="font-size:12px">No file chosen</span>
+</div>
+<div id="pPicPreview" style="margin-top:8px;text-align:center"></div>
+<div style="margin-top:8px;font-size:13px"><input type="checkbox" id="pRemovePic" style="width:auto"> Remove this image</div>
+
+<label>Location:</label><input id="pLocation" placeholder="">
+<label>YIM:</label><input id="pYIM" placeholder="">
+<label>Twitter:</label><input id="pTwitter" placeholder="">
+<label>Facebook:</label><input id="pFacebook" placeholder="">
+
+<div class="deact" onclick="deactivateAccount()">Deactivate Account</div>
+<button class="update-btn" onclick="updateProfile()">Update Profile</button>
+<div style="text-align:center"><button onclick="closeModal('profileModal')" style="background:#333;color:#fff;border:none;padding:8px 20px;border-radius:20px;margin-top:8px">(Go Up)</button></div>
 </div></div></div>
 
-<div class="modal" id="postModal"><div class="modal-box"><div class="modal-header"><b id="postHeader">Create New Topic (Admin Only)</b><span onclick="closeModal('postModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body">
-<div style="background:#e8ffe8;padding:10px;font-size:12px;border-radius:6px;margin-bottom:10px;border:1px solid #2d5a2d">✅ Admin Mode — Copy from Nairaland/Punch/Vanguard and paste here!</div>
-<input id="pTitle" placeholder="Topic Title - Paste Nairaland title here">
-<select id="pCat"></select>
-<textarea id="pBody" rows="9" placeholder="Full story content - Paste full news body here..."></textarea>
-<button onclick="createPost()" style="background:#003300;color:#fff;padding:12px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px;font-size:14px">🚀 Post Topic</button>
+<div class="modal" id="adminLoginModal"><div class="modal-box"><div class="modal-header"><b>🔐 Admin Login</b><span onclick="closeModal('adminLoginModal')" style="cursor:pointer">×</span></div><div class="modal-body">
+<input id="adminPass" type="password" placeholder="Password default: blessman123">
+<button onclick="adminLogin()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Login as Admin</button>
 </div></div></div>
 
-<div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="rName" placeholder="Choose username"><button onclick="doReg()" style="background:#003300;color:#fff;padding:10px;border:none;border-radius:6px;margin-top:10px;width:100%">Register — Can Comment Only</button></div></div></div>
+<div class="modal" id="postModal"><div class="modal-box wide"><div class="modal-header"><b id="postHeader">New Topic</b><span onclick="closeModal('postModal')" style="cursor:pointer">×</span></div><div class="modal-body">
+<input id="pTitle" placeholder="Title"><select id="pCat"></select><textarea id="pBody" rows="8" placeholder="Content"></textarea>
+<button onclick="createPost()" style="background:#003300;color:#fff;padding:12px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:10px">Post</button>
+</div></div></div>
 
-<div class="modal" id="loginModal"><div class="modal-box"><div class="modal-header"><b>Login</b><span onclick="closeModal('loginModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="lName" placeholder="Your username"><button onclick="doLogin()" style="background:#003300;color:#fff;padding:10px;border:none;border-radius:6px;margin-top:10px;width:100%">Login</button></div></div></div>
+<div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer">×</span></div><div class="modal-body">
+<input id="rUser" placeholder="Username"><input id="rEmail" placeholder="Email e.g. diamondovie02@gmail.com"><input id="rPass" type="password" placeholder="Password"><input id="rPass2" type="password" placeholder="Confirm Password">
+<button onclick="doRegister()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:8px">Create Account</button>
+</div></div></div>
+
+<div class="modal" id="loginModal"><div class="modal-box"><div class="modal-header"><b>Login</b><span onclick="closeModal('loginModal')" style="cursor:pointer">×</span></div><div class="modal-body">
+<input id="lUser" placeholder="Username"><input id="lPass" type="password" placeholder="Password">
+<button onclick="doLogin()" style="background:#003300;color:#fff;padding:11px;border:none;border-radius:6px;width:100%;font-weight:bold;margin-top:12px">Login</button>
+</div></div></div>
 
 <div id="toast"></div>
-
 <script>
 const boardData={"Blessman General":["Politics","Crime","Romance","Jobs/Vacancies","Career","Business","Investment","NYSC","Education","Autos","Car Talk","Properties","Health","Travel","Family","Culture","Food","Agriculture"],"Entertainment":["Jokes","TV/Movies","Music/Radio","Celebrities","Fashion","Events","Sports","Gaming","Literature"],"Science/Technology":["Programming","Webmasters","Computers","Phones","Technology Market"]};
 let currentBoard=null; let currentViewIdx=null;
-let user=localStorage.getItem('naija_user')||'Guest';
+let currentUser=JSON.parse(localStorage.getItem('currentUser')||'null');
+let users=JSON.parse(localStorage.getItem('bless_users')||'[]');
 let isAdmin=localStorage.getItem('isAdmin')==='true';
 let ADMIN_PASS=localStorage.getItem('admin_pass')||'blessman123';
 let TOPICS=JSON.parse(localStorage.getItem('bless_topics')||'[]');
 let comments=JSON.parse(localStorage.getItem('bless_comments')||'{}');
-function save(){localStorage.setItem('bless_topics',JSON.stringify(TOPICS));localStorage.setItem('bless_comments',JSON.stringify(comments));}
+function save(){localStorage.setItem('bless_topics',JSON.stringify(TOPICS));localStorage.setItem('bless_comments',JSON.stringify(comments));localStorage.setItem('bless_users',JSON.stringify(users));localStorage.setItem('currentUser',JSON.stringify(currentUser));}
+function getUserLabel(){ if(isAdmin) return 'Admin'; if(currentUser) return currentUser.username; return 'Guest'; }
 function init(){
-document.getElementById('userLabel').textContent=user+(isAdmin?' (Admin)':'');
+document.getElementById('userLabel').textContent=getUserLabel()+(isAdmin?' (Admin)':'');
 document.getElementById('dateStr').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+' at '+new Date().toLocaleTimeString();
 let html=''; let opts='';
 for(let sec in boardData){ html+=`<div class="sec"><b>${sec}:</b><br>`+boardData[sec].map(b=>`<span onclick="openBoard('${b}')">${b}</span>`).join('')+'</div>'; boardData[sec].forEach(b=>opts+=`<option value="${b}">${b}</option>`); }
 document.getElementById('boardList').innerHTML=html;
 document.getElementById('pCat').innerHTML=opts;
+let d=document.getElementById('pDay'); for(let i=1;i<=31;i++){ let o=document.createElement('option'); o.text=i; o.value=i; d.appendChild(o); }
+let y=document.getElementById('pYear'); for(let i=2026;i>=1950;i--){ let o=document.createElement('option'); o.text=i; o.value=i; y.appendChild(o); }
 updateAdminUI();
 }
 function updateAdminUI(){
-if(isAdmin){ document.getElementById('newTopicBtn').classList.add('show'); document.getElementById('adminBadge').textContent='🔐 Admin Mode ON'; document.getElementById('userLabel').textContent=user+' (Admin)'; }
+if(isAdmin){ document.getElementById('newTopicBtn').classList.add('show'); document.getElementById('adminBadge').textContent='🔐 Admin'; }
 else { document.getElementById('newTopicBtn').classList.remove('show'); document.getElementById('adminBadge').textContent=''; }
+document.getElementById('userLabel').textContent=getUserLabel()+(isAdmin?' (Admin)':'');
+if(currentUser||isAdmin){ document.getElementById('profileLink').style.display='inline'; document.getElementById('editProfileLink').style.display='inline'; } else { document.getElementById('profileLink').style.display='none'; document.getElementById('editProfileLink').style.display='none'; }
+}
+function openProfile(){
+if(!currentUser && !isAdmin) return toast('Login first');
+let u = currentUser || {username:'Admin',email:'admin@blessman.com'};
+document.getElementById('pEmailDisplay').textContent=u.email||'diamondovie02@gmail.com';
+document.getElementById('pDay').value=u.birthDay||'-- Day --';
+document.getElementById('pMonth').value=u.birthMonth||'-- Month --';
+document.getElementById('pYear').value=u.birthYear||'-- Year --';
+document.getElementById('pGender').value=u.gender||'';
+document.getElementById('pText').value=u.personalText||'';
+document.getElementById('pSig').value=u.signature||'';
+document.getElementById('pLocation').value=u.location||'';
+document.getElementById('pYIM').value=u.yim||'';
+document.getElementById('pTwitter').value=u.twitter||'';
+document.getElementById('pFacebook').value=u.facebook||'';
+if(u.picture){ document.getElementById('pPicPreview').innerHTML=`<img src="${u.picture}" style="max-width:100px;border-radius:8px;border:2px solid #2d5a2d">`; }
+else document.getElementById('pPicPreview').innerHTML='';
+openModal('profileModal');
+}
+function previewPic(input){
+if(input.files && input.files[0]){
+let f=input.files[0]; document.getElementById('pFileName').textContent=f.name;
+let reader=new FileReader(); reader.onload=e=>{ document.getElementById('pPicPreview').innerHTML=`<img src="${e.target.result}" style="max-width:100px;border-radius:8px">`; document.getElementById('pPicPreview').dataset.temp=e.target.result; }; reader.readAsDataURL(f);
+}
+}
+function updateProfile(){
+if(!currentUser && !isAdmin) return;
+let tempPic=document.getElementById('pPicPreview').dataset.temp;
+let remove=document.getElementById('pRemovePic').checked;
+let data={
+birthDay:document.getElementById('pDay').value,
+birthMonth:document.getElementById('pMonth').value,
+birthYear:document.getElementById('pYear').value,
+gender:document.getElementById('pGender').value,
+personalText:document.getElementById('pText').value,
+signature:document.getElementById('pSig').value,
+location:document.getElementById('pLocation').value,
+yim:document.getElementById('pYIM').value,
+twitter:document.getElementById('pTwitter').value,
+facebook:document.getElementById('pFacebook').value,
+};
+if(tempPic && !remove) data.picture=tempPic;
+if(remove) data.picture='';
+let idx=users.findIndex(x=>currentUser && x.username===currentUser.username);
+if(idx>=0){ users[idx]={...users[idx],...data}; currentUser=users[idx]; }
+else if(isAdmin){ currentUser={username:'Admin',...data,picture:tempPic||currentUser?.picture}; }
+else { currentUser={...currentUser,...data}; if(tempPic) currentUser.picture=tempPic; }
+save(); closeModal('profileModal'); toast('✅ Profile Updated!');
+}
+function changeEmail(){
+let ne=prompt('Enter new email:',currentUser?.email||'diamondovie02@gmail.com');
+if(ne){ let idx=users.findIndex(x=>currentUser && x.username===currentUser.username); if(idx>=0) users[idx].email=ne; if(currentUser) currentUser.email=ne; save(); document.getElementById('pEmailDisplay').textContent=ne; toast('Email changed to '+ne); }
+}
+function deactivateAccount(){
+if(!confirm('Deactivate your account? This will logout and delete your profile!')) return;
+let idx=users.findIndex(x=>currentUser && x.username===currentUser.username);
+if(idx>=0) users.splice(idx,1);
+currentUser=null; isAdmin=false; localStorage.removeItem('isAdmin'); localStorage.removeItem('currentUser'); save(); closeModal('profileModal'); init(); toast('Account deactivated'); showHome();
+}
+function doRegister(){
+let u=document.getElementById('rUser').value.trim(); let e=document.getElementById('rEmail').value.trim(); let p=document.getElementById('rPass').value; let p2=document.getElementById('rPass2').value;
+if(!u||!p) return toast('Enter username & password'); if(p.length<4) return toast('Password 4+ chars'); if(p!==p2) return toast('Passwords no match');
+if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return toast('Username exists');
+let newUser={username:u,email:e||'diamondovie02@gmail.com',password:p};
+users.push(newUser); currentUser=newUser; save(); closeModal('regModal'); init(); toast('✅ Welcome '+u);
+}
+function doLogin(){
+let u=document.getElementById('lUser').value.trim(); let p=document.getElementById('lPass').value;
+if(!u||!p) return toast('Enter username & password');
+let found=users.find(x=>x.username.toLowerCase()===u.toLowerCase() && x.password===p);
+if(!found){ if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin',email:'admin@blessman.com'}; save(); closeModal('loginModal'); init(); toast('✅ Admin ON'); return; } return toast('Wrong username/password'); }
+currentUser=found; save(); closeModal('loginModal'); init(); toast('Welcome '+found.username);
 }
 function adminLogin(){
 let p=document.getElementById('adminPass').value;
-if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); user='Admin'; localStorage.setItem('naija_user',user); closeModal('adminLoginModal'); init(); toast('✅ Admin ON - You can post & delete!'); if(currentBoard) renderTopics(); }
-else toast('❌ Wrong password! Default is blessman123');
+if(p===ADMIN_PASS){ isAdmin=true; localStorage.setItem('isAdmin','true'); currentUser={username:'Admin',email:'admin@blessman.com'}; save(); closeModal('adminLoginModal'); init(); toast('✅ Admin ON'); }
+else toast('Wrong password! Default blessman123');
 }
-function adminLogout(){ isAdmin=false; localStorage.removeItem('isAdmin'); user='Guest'; localStorage.setItem('naija_user',user); init(); toast('Admin logged out'); closeModal('adminLoginModal'); if(currentBoard) renderTopics(); }
-function openBoard(board){
-currentBoard=board;
-document.getElementById('homeCard').style.display='none';
-document.getElementById('topicCard').style.display='block';
-document.getElementById('boardTitle').textContent=board;
-document.getElementById('pCat').value=board;
-document.getElementById('postHeader').textContent='New Topic in '+board;
-renderTopics(); window.scrollTo({top:0,behavior:'smooth'});
-}
+function adminLogout(){ isAdmin=false; localStorage.removeItem('isAdmin'); currentUser=null; localStorage.removeItem('currentUser'); init(); toast('Admin out'); closeModal('adminLoginModal'); }
+function openBoard(board){ currentBoard=board; document.getElementById('homeCard').style.display='none'; document.getElementById('topicCard').style.display='block'; document.getElementById('boardTitle').textContent=board; document.getElementById('pCat').value=board; document.getElementById('postHeader').textContent='New Topic in '+board; renderTopics(); window.scrollTo({top:0,behavior:'smooth'}); }
 function showHome(){ document.getElementById('homeCard').style.display='block'; document.getElementById('topicCard').style.display='none'; currentBoard=null; document.getElementById('q').value=''; }
 function showAllTopics(){ currentBoard=null; document.getElementById('homeCard').style.display='none'; document.getElementById('topicCard').style.display='block'; document.getElementById('boardTitle').textContent='All Topics'; renderTopics(true); }
 function renderTopics(all=false){
 let q=document.getElementById('q').value.toLowerCase();
 let list=[...TOPICS];
 if(!all && currentBoard) list=list.filter(t=>t.cat.toLowerCase()===currentBoard.toLowerCase());
-if(q) list=list.filter(t=>t.title.toLowerCase().includes(q) || t.body.toLowerCase().includes(q));
+if(q) list=list.filter(t=>t.title.toLowerCase().includes(q));
 let html='';
-if(list.length===0){
-if(isAdmin){ html=`<div style="text-align:center;padding:30px"><div style="font-size:14px;margin-bottom:10px">No topics in <b>${currentBoard||'All Boards'}</b> yet.</div><div style="font-size:12px;color:#888;margin-bottom:15px">Copy from Nairaland, paste here!</div><button onclick="openModal('postModal')" style="background:#ffcc00;color:#000;padding:10px 22px;border:none;border-radius:20px;font-weight:bold">+ Post First Topic</button></div>`; }
-else { html=`<div style="text-align:center;padding:30px;color:#888"><div>No topics in <b>${currentBoard||'All Boards'}</b> yet.</div><div style="font-size:11px;margin-top:10px">Only Admin can post. Check back later.</div></div>`; }
-} else {
-list.forEach(t=>{ let realIdx=TOPICS.indexOf(t); html+=`<div class="news-item" onclick="viewTopic(${realIdx})">» <b>${t.title}</b> «<span class="meta">${t.author} • ${timeAgo(t.time)} • ${t.cat} • ${(comments['c_'+realIdx]||[]).length} comments ${isAdmin?'<span class="del-btn" onclick="event.stopPropagation(); deleteTopic('+realIdx+')">Delete</span>':''}</span></div>`; });
-}
+if(list.length===0){ html=isAdmin?`<div style="text-align:center;padding:30px"><div>No topics in <b>${currentBoard||'All'}</b></div><button onclick="openModal('postModal')" style="background:#ffcc00;color:#000;padding:10px 22px;border:none;border-radius:20px;font-weight:bold;margin-top:12px">+ Post First Topic</button></div>`:`<div style="text-align:center;padding:30px;color:#888">No topics in <b>${currentBoard||'All'}</b></div>`; }
+else { list.forEach(t=>{ let i=TOPICS.indexOf(t); html+=`<div class="news-item" onclick="viewTopic(${i})">» <b>${t.title}</b> «<span class="meta">${t.author} • ${timeAgo(t.time)} • ${t.cat} • ${(comments['c_'+i]||[]).length} comments</span></div>`; }); }
 document.getElementById('newsBox').innerHTML=html;
 }
-function viewTopic(idx){
-let t=TOPICS[idx]; if(!t) return; currentViewIdx=idx;
-document.getElementById('vTitle').textContent=t.title;
-document.getElementById('delBtn').style.display=isAdmin?'inline-block':'none';
-document.getElementById('vBody').innerHTML=`<div style="font-size:11px;color:#666">${t.author} • ${timeAgo(t.time)} • ${t.cat}</div><div style="margin:14px 0;white-space:pre-wrap;line-height:1.7;font-size:14px">${t.body}</div><hr><div style="margin-top:12px;font-weight:bold">Comments (${(comments['c_'+idx]||[]).length})</div><div id="cList"></div><textarea id="ct" placeholder="Comment as ${user}..." rows="3" style="width:100%;margin-top:10px"></textarea><input id="cn" placeholder="Name" value="${user!=='Guest'?user:''}"><button onclick="postComment(${idx})" style="background:#003300;color:#fff;padding:8px 16px;border:none;border-radius:5px;margin-top:8px">Post Comment</button>`;
-renderComments(idx); openModal('viewModal');
-}
-function deleteTopic(idx){
-if(!isAdmin) return toast('Only Admin can delete');
-if(!confirm('Delete this topic?')) return;
-TOPICS.splice(idx,1);
-let newComments={};
-for(let k in comments){ let num=parseInt(k.split('_')[1]); if(num===idx) continue; let newNum=num>idx?num-1:num; newComments['c_'+newNum]=comments[k]; }
-comments=newComments;
-save(); closeModal('viewModal'); renderTopics(); toast('🗑️ Deleted');
-}
-function deleteCurrent(){ if(currentViewIdx!==null) deleteTopic(currentViewIdx); }
-function renderComments(idx){ let id='c_'+idx; let list=comments[id]||[]; document.getElementById('cList').innerHTML=list.map(c=>`<div class="comment"><b>${c.author}</b> • ${timeAgo(c.time)}<br>${c.text}</div>`).join('')||'<div style="font-size:11px;color:#888">No comments yet.</div>'; }
-function postComment(idx){ let txt=document.getElementById('ct').value.trim(); if(!txt) return toast('Write comment'); let name=document.getElementById('cn').value.trim()||'Guest'; let id='c_'+idx; if(!comments[id]) comments[id]=[]; comments[id].push({author:name,text:txt,time:Date.now()}); save(); document.getElementById('ct').value=''; renderComments(idx); toast('Comment posted!'); renderTopics(); }
-function createPost(){
-if(!isAdmin){ return toast('Only Admin!'); }
-let title=document.getElementById('pTitle').value.trim();
-let body=document.getElementById('pBody').value.trim();
-let cat=document.getElementById('pCat').value;
-if(!title||!body) return toast('Need Title + Body');
-TOPICS.unshift({title:title,cat:cat,author:'Admin',time:Date.now(),body:body});
-save(); closeModal('postModal');
-document.getElementById('pTitle').value=''; document.getElementById('pBody').value='';
-renderTopics(); toast('✅ Posted in '+cat+' as » '+title.slice(0,20)+'... «');
-}
+function viewTopic(idx){ let t=TOPICS[idx]; if(!t) return; currentViewIdx=idx; document.getElementById('vTitle').textContent=t.title; document.getElementById('delBtn').style.display=isAdmin?'inline-block':'none'; let can=currentUser||isAdmin; document.getElementById('vBody').innerHTML=`<div style="font-size:11px;color:#666">${t.author} • ${timeAgo(t.time)}</div><div style="margin:14px 0;white-space:pre-wrap">${t.body}</div><hr><div id="cList"></div>${can?`<textarea id="ct" placeholder="Comment as ${getUserLabel()}..." rows="3" style="width:100%;margin-top:10px"></textarea><button onclick="postComment(${idx})" style="background:#003300;color:#fff;padding:8px 16px;border:none;border-radius:5px;margin-top:8px">Post</button>`:`<div style="background:#fff8c0;padding:10px;border-radius:6px;margin-top:10px;text-align:center">Login to comment</div>`}`; renderComments(idx); openModal('viewModal'); }
+function renderComments(idx){ let id='c_'+idx; let list=comments[id]||[]; document.getElementById('cList').innerHTML=list.map(c=>`<div class="comment"><b>${c.author}</b> • ${timeAgo(c.time)}<br>${c.text}</div>`).join('')||'<div style="font-size:11px;color:#888">No comments</div>'; }
+function postComment(idx){ if(!currentUser && !isAdmin) return toast('Login first'); let txt=document.getElementById('ct').value.trim(); if(!txt) return toast('Write comment'); let id='c_'+idx; if(!comments[id]) comments[id]=[]; comments[id].push({author:getUserLabel(),text:txt,time:Date.now()}); save(); document.getElementById('ct').value=''; renderComments(idx); toast('Comment posted'); }
+function createPost(){ if(!isAdmin) return toast('Only Admin'); let title=document.getElementById('pTitle').value.trim(); let body=document.getElementById('pBody').value.trim(); let cat=document.getElementById('pCat').value; if(!title||!body) return toast('Need Title+Body'); TOPICS.unshift({title:title,cat:cat,author:'Admin',time:Date.now(),body:body}); save(); closeModal('postModal'); document.getElementById('pTitle').value='';document.getElementById('pBody').value=''; renderTopics(); toast('Posted in '+cat); }
 function doSearch(){ if(document.getElementById('homeCard').style.display!=='none'){ showAllTopics(); } else { renderTopics(currentBoard===null); } }
-function openModal(id){document.getElementById(id).classList.add('show'); if(id==='postModal' && !isAdmin){ closeModal(id); openModal('adminLoginModal'); toast('Admin only!'); }}
+function openModal(id){document.getElementById(id).classList.add('show'); if(id==='postModal' && !isAdmin){ closeModal(id); openModal('adminLoginModal'); }}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
-function doReg(){let n=document.getElementById('rName').value.trim(); if(!n) return toast('Enter name'); user=n; localStorage.setItem('naija_user',n); document.getElementById('userLabel').textContent=n; closeModal('regModal'); toast('Welcome '+n+' - Can comment');}
-function doLogin(){let n=document.getElementById('lName').value.trim(); if(!n) return toast('Enter name'); user=n; localStorage.setItem('naija_user',n); document.getElementById('userLabel').textContent=n+(isAdmin?' (Admin)':''); closeModal('loginModal'); toast('Welcome '+n);}
+function deleteTopic(idx){ if(!isAdmin) return; if(!confirm('Delete?')) return; TOPICS.splice(idx,1); let nc={}; for(let k in comments){ let num=parseInt(k.split('_')[1]); if(num===idx) continue; let n=num>idx?num-1:num; nc['c_'+n]=comments[k]; } comments=nc; save(); closeModal('viewModal'); renderTopics(); toast('Deleted'); }
+function deleteCurrent(){ if(currentViewIdx!==null) deleteTopic(currentViewIdx); }
 function toast(m){let t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',3000);}
 function timeAgo(ts){let s=Math.floor((Date.now()-ts)/1000); if(s<60) return s+'s ago'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago';}
 init();
