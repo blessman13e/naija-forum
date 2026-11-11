@@ -8,19 +8,18 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Verdana,Arial,sans-serif}
 body{background:#000;color:#c8e6c8}
 .header{background:#003300;border-bottom:4px solid #1a5c1a;padding:10px;text-align:center;position:sticky;top:0;z-index:20}
-.header h1{font-size:24px;color:#fff;letter-spacing:1px}
-.navline{font-size:12px;margin:6px 0}
-.navline b{color:#fff}
-.navline span{background:#0a2a0a;padding:3px 8px;border-radius:10px;margin:2px;display:inline-block;cursor:pointer;border:1px solid #1a4d1a}
-.stats{font-size:11px;background:#001a00;padding:5px;border-radius:5px;margin-top:6px}
+.header h1{font-size:22px;color:#fff;letter-spacing:1px;cursor:pointer}
+.navline{font-size:11px;margin:6px 0}
+.navline span{background:#0a2a0a;padding:4px 9px;border-radius:12px;margin:3px;display:inline-block;cursor:pointer;border:1px solid #1a4d1a}
+.stats{font-size:10px;background:#001a00;padding:5px;border-radius:5px;margin-top:6px}
 .search-box{margin:10px auto;display:flex;gap:6px;max-width:500px}
 .search-box input{flex:1;padding:7px 12px;border-radius:20px;border:1px solid #2d5a2d;background:#0a1a0a;color:#fff}
 .search-box button{padding:7px 14px;border-radius:20px;border:none;background:#2d5a2d;color:#fff;cursor:pointer}
 .main{max-width:900px;margin:0 auto;padding:0 5px}
 .card{background:#0e2e0e;border:1px solid #1a4d1a;border-radius:10px;padding:10px;margin:8px 0}
-.trending-title{font-size:14px;font-weight:bold;color:#fff;text-align:center;padding:6px;background:#1a4d1a;border-radius:6px;margin-bottom:8px}
+.trending-title{font-size:13px;font-weight:bold;color:#fff;text-align:center;padding:6px;background:#1a4d1a;border-radius:6px;margin-bottom:8px}
 .news-list{line-height:1.5}
-.news-item{padding:8px 4px;border-bottom:1px dotted #1a4d1a;font-size:13.5px;color:#d0f0d0;cursor:pointer}
+.news-item{padding:9px 4px;border-bottom:1px dotted #1a4d1a;font-size:13.5px;color:#d0f0d0;cursor:pointer}
 .news-item:hover{background:#142e14}
 .news-item b{color:#90ee90;font-weight:normal}
 .news-item .meta{font-size:10px;color:#7aaa7a;display:block;margin-top:2px}
@@ -30,33 +29,34 @@ body{background:#000;color:#c8e6c8}
 .boards{font-size:13px;line-height:1.8;color:#a8d8a8}
 .boards b{color:#fff}
 .boards span{cursor:pointer;text-decoration:underline}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99;align-items:center;justify-content:center;padding:10px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99;align-items:center;justify-content:center;padding:10px}
 .modal.show{display:flex}
-.modal-box{background:#f5f5e5;color:#000;width:100%;max-width:650px;border-radius:6px;max-height:90vh;overflow:auto}
+.modal-box{background:#f5f5e5;color:#000;width:100%;max-width:700px;border-radius:8px;max-height:92vh;overflow:auto}
 .modal-header{background:#003300;color:#fff;padding:10px;display:flex;justify-content:space-between}
 .modal-body{padding:12px;font-size:13px;line-height:1.5}
 .comment{background:#e8e8d0;padding:8px;margin:6px 0;border-left:3px solid #2d5a2d;font-size:12px}
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#003300;color:#fff;padding:8px 16px;border-radius:20px;display:none;z-index:200;font-size:12px}
+input,textarea,select{border:1px solid #888;border-radius:4px}
 </style>
 </head>
 <body>
 <div class="header">
 <h1 onclick="location.reload()">BLESSMAN FORUM</h1>
-<div class="navline">Welcome, <b id="userLabel">Guest</b>: <span onclick="openModal('regModal')">Register</span> <span onclick="showAll()">All Boards</span> <span onclick="loadNews(true)">🔄 Refresh</span> <span onclick="openModal('postModal')">+ Post</span></div>
-<div class="stats"><b>Live:</b> <span id="cnt">1 members, 0 topics</span> • Auto 3 mins • <span id="dateStr"></span></div>
+<div class="navline">Welcome, <b id="userLabel">Guest</b>: <span onclick="openModal('regModal')">Register</span> <span onclick="showAll()">All Boards</span> <span onclick="loadNews(true)">🔄 Refresh</span> <span onclick="openModal('postModal')">+ Post</span> <span style="background:#ffcc00;color:#000;font-weight:bold" onclick="openModal('adminModal')">📋 PASTE NEWS</span></div>
+<div class="stats"><b>Live:</b> <span id="cnt">0 topics</span> • Copy-Paste like Nairaland • Auto 3 mins • <span id="dateStr"></span></div>
 <div class="search-box"><input id="q" placeholder="Search news, boards..."><button onclick="doSearch()">Search</button></div>
 </div>
 <div class="main">
 <div class="card">
-<div class="trending-title">🔴 TRENDING NEWS - Auto from Naija Papers + BBC</div>
+<div class="trending-title">🔴 TRENDING - Click to read & comment</div>
 <div class="tabs">
-<button class="active" id="t-all" onclick="switchT('all')">🔥 All Trending</button>
+<button class="active" id="t-all" onclick="switchT('all')">🔥 All</button>
 <button id="t-naija" onclick="switchT('naija')">🇳🇬 Naija</button>
 <button id="t-politics" onclick="switchT('politics')">🏛️ Politics</button>
 <button id="t-bbc" onclick="switchT('bbc')">🌍 BBC</button>
 <button id="t-sports" onclick="switchT('sports')">⚽ Sports</button>
 </div>
-<div class="news-list" id="newsBox"><div style="text-align:center;padding:20px">⏳ Loading trending news...</div></div>
+<div class="news-list" id="newsBox"></div>
 </div>
 <div class="card">
 <div style="text-align:center;font-weight:bold;font-size:13px;color:#fff;margin-bottom:8px">Forum Boards - Click to filter</div>
@@ -64,35 +64,38 @@ body{background:#000;color:#c8e6c8}
 <div id="manualBox"></div>
 </div>
 </div>
-<div class="modal" id="viewModal"><div class="modal-box"><div class="modal-header"><b id="vTitle"></b><span onclick="closeModal('viewModal')" style="cursor:pointer">×</span></div><div class="modal-body" id="vBody"></div></div></div>
-<div class="modal" id="postModal"><div class="modal-box"><div class="modal-header"><b>New Topic</b><span onclick="closeModal('postModal')" style="cursor:pointer">×</span></div><div class="modal-body"><select id="nCat"></select><input id="nTitle" placeholder="Title" style="width:100%;padding:8px;margin:5px 0"><textarea id="nCont" rows="4" placeholder="Content" style="width:100%;padding:8px"></textarea><button onclick="createPost()" style="background:#003300;color:#fff;padding:8px 16px;border:none;border-radius:4px;margin-top:6px">Post</button></div></div></div>
+
+<div class="modal" id="viewModal"><div class="modal-box"><div class="modal-header"><b id="vTitle"></b><span onclick="closeModal('viewModal')" style="cursor:pointer;font-size:20px">×</span></div><div class="modal-body" id="vBody"></div></div></div>
+
+<div class="modal" id="adminModal"><div class="modal-box"><div class="modal-header"><b>📋 PASTE NEWS - Like Nairaland Mod</b><span onclick="closeModal('adminModal')" style="cursor:pointer">×</span></div><div class="modal-body">
+<div style="background:#fff8c0;padding:8px;font-size:11px;margin-bottom:8px;border-radius:4px">HOW TO COPY LIKE NAIRALAND:<br>1. Go Nairaland.com, copy Title<br>2. Copy story body<br>3. Paste here and Post!</div>
+<input id="aTitle" placeholder="Paste News Title here (e.g. Obasanjo: Tinubu Has Failed)" style="width:100%;padding:10px;margin:5px 0;font-weight:bold">
+<input id="aSource" placeholder="Source (e.g. Nairaland, Punch, BBC) - default Blessman Forum" style="width:100%;padding:8px;margin:5px 0">
+<select id="aCat" style="width:100%;padding:8px;margin:5px 0">
+<option value="Politics">Politics</option><option value="Crime">Crime</option><option value="Romance">Romance</option><option value="Business">Business</option><option value="Sports">Sports</option><option value="Naija General">Naija General</option><option value="Properties">Properties</option><option value="Entertainment">Entertainment</option><option value="BBC">BBC World</option>
+</select>
+<textarea id="aBody" rows="8" placeholder="Paste full story content here...&#10;&#10;You can paste from Nairaland, Punch, Vanguard etc" style="width:100%;padding:10px;margin:5px 0"></textarea>
+<input id="aLink" placeholder="Optional: Source link (https://...)" style="width:100%;padding:8px;margin:5px 0">
+<button onclick="pasteNews()" style="background:#003300;color:#fff;padding:12px 20px;border:none;border-radius:6px;width:100%;font-weight:bold;font-size:14px">🚀 POST AS TRENDING » Title «</button>
+</div></div></div>
+
+<div class="modal" id="postModal"><div class="modal-box"><div class="modal-header"><b>New Topic</b><span onclick="closeModal('postModal')" style="cursor:pointer">×</span></div><div class="modal-body"><select id="nCat" style="width:100%;padding:8px;margin:5px 0"></select><input id="nTitle" placeholder="Title" style="width:100%;padding:8px;margin:5px 0"><textarea id="nCont" rows="4" placeholder="Content" style="width:100%;padding:8px"></textarea><button onclick="createPost()" style="background:#003300;color:#fff;padding:8px 16px;border:none;border-radius:4px;margin-top:6px">Post</button></div></div></div>
 <div class="modal" id="regModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('regModal')" style="cursor:pointer">×</span></div><div class="modal-body"><input id="rName" placeholder="Your name" style="width:100%;padding:8px"><button onclick="doReg()" style="background:#003300;color:#fff;padding:8px 16px;border:none;border-radius:4px;margin-top:6px">Register</button></div></div></div>
 <div id="toast"></div>
 <script>
 const boards={"Naija General":["Politics","Crime","Romance","Jobs","Business","Education","Health","Travel","Family","Culture","Food","Agriculture","Properties"],"Entertainment":["Jokes","TV/Movies","Music","Celebrities","Fashion","Events","Sports","Gaming","Literature"],"Tech":["Programming","Webmasters","Computers","Phones","Art","Technology Market"]};
 let cur='all'; let user=localStorage.getItem('naija_user')||'Guest';
+let TRENDING=JSON.parse(localStorage.getItem('bless_trending')||'null') || [
+{title:"Record Number Of Arabs Sworn Into Israeli Parliament",cat:"Politics",src:"BBC",time:Date.now()-100000,desc:"Record number of Arab lawmakers don enter Israeli parliament for new session. This na historic for Israel politics.",link:""},
+{title:"Catholic Priest Apologises For Singing Peter Obi's Campaign Song In Church",cat:"Politics",src:"Vanguard",time:Date.now()-200000,desc:"Catholic priest don apologize after video of am singing Peter Obi campaign song inside church go viral.",link:""},
+{title:"Lagos Receives New Red Line Trains (Photos And Video)",cat:"Travel",src:"Punch",time:Date.now()-300000,desc:"Lagos State don receive new Red Line trains for Ikeja station. Governor Sanwo-Olu inspect the new trains today.",link:""},
+{title:"2 Bedroom Flat In Lekki Phase 1 For N1.2M - No Agent Fee",cat:"Properties",src:"Blessman Forum",time:Date.now()-1500000,desc:"Clean 2 bedroom flat for rent Lekki Phase 1, water dey, light, no agent. Contact direct landlord.",link:""},
+{title:"How I Dey Make N300K Monthly With POS Business With N50K",cat:"Business",src:"Blessman Forum",time:Date.now()-1600000,desc:"My POS business for Ikorodu dey give me N300k monthly profit. I start with N50k capital. Ask me how!",link:""}
+];
 let manual=JSON.parse(localStorage.getItem('naija_topics')||'[]');
 let comments=JSON.parse(localStorage.getItem('naija_comments')||'{}');
 
-// CORRECTED TRENDING LIKE YOUR SCREENSHOT - Mixed real Naija topics
-let TRENDING = [
-{title:"Record Number Of Arabs Sworn Into Israeli Parliament",cat:"Politics",src:"BBC",time:Date.now()-100000,desc:"Record number of Arab lawmakers don enter Israeli parliament for new session. This na historic for Israel politics."},
-{title:"Catholic Priest Apologises For Singing Peter Obi's Campaign Song In Church",cat:"Politics",src:"Vanguard",time:Date.now()-200000,desc:"Catholic priest don apologize after video of am singing Peter Obi campaign song inside church go viral for social media."},
-{title:"Lagos Receives New Red Line Trains (Photos And Video)",cat:"Travel",src:"Punch",time:Date.now()-300000,desc:"Lagos State don receive new Red Line trains for Ikeja station. Governor Sanwo-Olu inspect the new trains today."},
-{title:"Russia Secretly Boosted Iran's Missile Arsenal Before War With US",cat:"BBC",src:"BBC World",time:Date.now()-400000,desc:"Report show say Russia secretly help Iran boost missile arsenal before tension with US increase for Middle East."},
-{title:"Obasanjo: 'Tinubu Has Failed, Don't Let Him Return For 2nd Term' (Video)",cat:"Politics",src:"PremiumTimes",time:Date.now()-500000,desc:"Former President Obasanjo don talk say Tinubu government don fail, make Nigerians no allow am return for 2nd term 2027."},
-{title:"INEC Challenges Court Order To Produce Tinubu's 1999 & 2023 Election Documents",cat:"Politics",src:"Vanguard",time:Date.now()-600000,desc:"INEC don challenge court order wey say make dem produce Tinubu election documents from 1999 and 2023 elections."},
-{title:"Seyi Tinubu In Kebbi State (Video)",cat:"Politics",src:"Punch",time:Date.now()-700000,desc:"Seyi Tinubu don visit Kebbi State for youth empowerment program. Video of im visit don trend for X."},
-{title:"Hajiya Sulaiman-Ibrahim Personally Sharing N100,000 To Women, Nigerians React (Video)",cat:"Naija General",src:"Vanguard",time:Date.now()-800000,desc:"Minister Hajiya Sulaiman-Ibrahim dey share N100k to women for empowerment, Nigerians don react for social media."},
-{title:"We Will Provide Reliable Power, Privatisation Is Not Working - Tinubu",cat:"Politics",src:"Punch",time:Date.now()-900000,desc:"President Tinubu don promise say im government go provide reliable power, say privatisation no dey work."},
-{title:"I Was An Arms Dealer; I Sold Arms To Make Money - Senator Kalu",cat:"Crime",src:"PremiumTimes",time:Date.now()-1000000,desc:"Senator Orji Uzor Kalu don confess say e bin be arms dealer before, say na money e dey find that time."},
-{title:"Amupitan Defends Retaining Atiku On INEC Website As ADC Candidate",cat:"Politics",src:"Vanguard",time:Date.now()-1100000,desc:"INEC lawyer Amupitan don defend why dem still retain Atiku for website as ADC candidate despite court case."},
-{title:"I Didn't Tell Them To Go Buy Votes - Wike Defends N10M Reward For Councillors",cat:"Politics",src:"Punch",time:Date.now()-1200000,desc:"Wike don defend im N10M reward for councillors, say e no tell dem make dem go buy votes."},
-{title:"Super Eagles Qualify For World Cup 2026 After Beating Ghana 2-0",cat:"Sports",src:"BBC Sport",time:Date.now()-1300000,desc:"Super Eagles don qualify for World Cup 2026 after beating Ghana 2-0 for Abuja. Osimhen score two goals!"},
-{title:"Dollar Crashes To N1,450 As CBN New Policy Takes Effect",cat:"Business",src:"Business",time:Date.now()-1400000,desc:"Naira don appreciate from N1600 to N1450 per dollar after CBN new monetary policy. Traders happy."},
-{title:"2 Bedroom Flat In Lekki Phase 1 For N1.2M - No Agent Fee",cat:"Properties",src:"Blessman Forum",time:Date.now()-1500000,desc:"Clean 2 bedroom flat for rent Lekki Phase 1, water dey, light, no agent. Contact direct landlord."},
-{title:"How I Dey Make N300K Monthly With POS Business With N50K",cat:"Business",src:"Blessman Forum",time:Date.now()-1600000,desc:"My POS business for Ikorodu dey give me N300k monthly profit. I start with N50k capital. Ask me how!"}
-];
+function save(){ localStorage.setItem('bless_trending', JSON.stringify(TRENDING)); localStorage.setItem('naija_topics', JSON.stringify(manual)); localStorage.setItem('naija_comments', JSON.stringify(comments)); }
 
 function init(){
 document.getElementById('userLabel').textContent=user;
@@ -104,70 +107,61 @@ document.getElementById('nCat').innerHTML=opts;
 loadNews();
 }
 
-function loadNews(force=false){
-let q=document.getElementById('q').value.toLowerCase();
-let list=[...TRENDING];
-if(cur!=='all') list=list.filter(x=>x.cat.toLowerCase().includes(cur) || x.src.toLowerCase().includes(cur) || cur==='naija' && ['Politics','Crime','Properties','Naija General'].includes(x.cat));
-if(q) list=list.filter(x=>x.title.toLowerCase().includes(q) || x.cat.toLowerCase().includes(q));
-if(force) fetchReal(); // try real fetch on refresh
-renderNews(list);
+function pasteNews(){
+let title=document.getElementById('aTitle').value.trim();
+let body=document.getElementById('aBody').value.trim();
+let cat=document.getElementById('aCat').value;
+let src=document.getElementById('aSource').value.trim()||'Blessman Forum';
+let link=document.getElementById('aLink').value.trim();
+if(!title){ return toast('Paste Title first!'); }
+if(!body){ body=title + ' - Full details inside. Drop comment below!'; }
+TRENDING.unshift({title:title,cat:cat,src:src,desc:body.slice(0,800),time:Date.now(),link:link});
+save();
+closeModal('adminModal');
+document.getElementById('aTitle').value=''; document.getElementById('aBody').value=''; document.getElementById('aLink').value=''; document.getElementById('aSource').value='';
+loadNews();
+toast('✅ Posted as » '+title.slice(0,20)+'... «');
+window.scrollTo({top:0,behavior:'smooth'});
 }
 
-async function fetchReal(){
-try{
-let feeds=["https://www.vanguardngr.com/feed/","https://punchng.com/feed/"];
-for(let f of feeds){
-let api=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f)}`;
-let r=await fetch(api); let d=await r.json();
-if(d.status==='ok'){
-let real=d.items.slice(0,6).map(i=>({title:i.title.replace(/&#8217;/g,"'"),cat:"Naija",src:new URL(f).hostname.replace('www.',''),desc:i.description.replace(/<[^>]*>/g,'').slice(0,150),time:new Date(i.pubDate).getTime()}));
-TRENDING = [...real, ...TRENDING].slice(0,25);
-renderNews(TRENDING);
-break;
-}
-}
-}catch(e){}
+function loadNews(){
+let q=document.getElementById('q').value.toLowerCase();
+let list=[...TRENDING];
+if(cur!=='all') list=list.filter(x=>x.cat.toLowerCase().includes(cur) || x.src.toLowerCase().includes(cur) || (cur==='naija' && ['Politics','Crime','Properties','Naija General'].includes(x.cat)));
+if(q) list=list.filter(x=>x.title.toLowerCase().includes(q) || x.cat.toLowerCase().includes(q) || x.desc.toLowerCase().includes(q));
+renderNews(list);
 }
 
 function renderNews(list){
 let html='';
 list.forEach((n,i)=>{
-html+=`<div class="news-item" onclick="openNews(${i})">» <b>${n.title}</b> «<span class="meta">${n.src} • ${timeAgo(n.time)} • ${n.cat} • ${ (comments['t_'+i]||[]).length } comments</span></div>`;
+let idx=TRENDING.indexOf(n);
+html+=`<div class="news-item" onclick="openNews(${idx})">» <b>${n.title}</b> «<span class="meta">${n.src} • ${timeAgo(n.time)} • ${n.cat} • ${(comments['t_'+idx]||[]).length} comments ${n.link?'• 🔗':''}</span></div>`;
 });
-document.getElementById('newsBox').innerHTML=html||'<div style="text-align:center;padding:15px">No news for that search</div>';
-document.getElementById('cnt').textContent=`${localStorage.getItem('naija_users')||1} members, ${list.length+manual.length} topics`;
+document.getElementById('newsBox').innerHTML=html||'<div style="text-align:center;padding:15px">No news. Click PASTE NEWS to add!</div>';
+document.getElementById('cnt').textContent=`${localStorage.getItem('naija_users')||2} members, ${list.length} topics`;
 }
 
-function switchT(t){
-cur=t;
-document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-document.getElementById('t-'+t).classList.add('active');
-loadNews();
-}
-
+function switchT(t){ cur=t; document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active')); document.getElementById('t-'+t).classList.add('active'); loadNews(); }
 function openNews(i){
-let n=TRENDING[i];
+let n=TRENDING[i]; if(!n) return;
 document.getElementById('vTitle').textContent=n.title;
-document.getElementById('vBody').innerHTML=`<div style="font-size:10px;color:#666">${n.src} • ${timeAgo(n.time)} • ${n.cat}</div><div style="margin:10px 0;line-height:1.6">${n.desc}<br><br>${n.title}.<br><br>Drop your comment below, make we discuss!</div><hr><div id="cList"></div><textarea id="rt" placeholder="Comment..." rows="3" style="width:100%;padding:7px"></textarea><input id="rn" placeholder="Your name" value="${user!=='Guest'?user:''}" style="width:100%;padding:7px;margin-top:5px"><button onclick="postC('t_${i}')" style="background:#003300;color:#fff;padding:7px 14px;border:none;border-radius:4px;margin-top:6px">Post Comment</button>`;
-renderC('t_'+i);
-openModal('viewModal');
+document.getElementById('vBody').innerHTML=`<div style="font-size:10px;color:#666">${n.src} • ${timeAgo(n.time)} • ${n.cat} ${n.link?`<br><a href="${n.link}" target="_blank">Source: ${n.link}</a>`:''}</div><div style="margin:12px 0;line-height:1.6;white-space:pre-wrap">${n.desc}</div><hr><div id="cList"></div><textarea id="rt" placeholder="Comment..." rows="3" style="width:100%;padding:7px"></textarea><input id="rn" placeholder="Your name" value="${user!=='Guest'?user:''}" style="width:100%;padding:7px;margin-top:5px"><button onclick="postC('t_${i}')" style="background:#003300;color:#fff;padding:7px 14px;border:none;border-radius:4px;margin-top:6px">Post Comment</button>`;
+renderC('t_'+i); openModal('viewModal');
 }
-
 function renderC(id){ let list=comments[id]||[]; document.getElementById('cList').innerHTML=list.map(c=>`<div class="comment"><b>${c.author}</b> • ${timeAgo(c.time)}<br>${c.text}</div>`).join('')||'<div style="font-size:11px;color:#888">No comments yet. Be first!</div>'; }
-function postC(id){ let t=document.getElementById('rt').value.trim(); if(!t) return toast('Write comment'); let name=document.getElementById('rn').value.trim()||'Guest'; if(!comments[id]) comments[id]=[]; comments[id].push({author:name,text:t,time:Date.now()}); localStorage.setItem('naija_comments',JSON.stringify(comments)); document.getElementById('rt').value=''; renderC(id); toast('Posted!'); loadNews(); }
+function postC(id){ let t=document.getElementById('rt').value.trim(); if(!t) return toast('Write comment'); let name=document.getElementById('rn').value.trim()||'Guest'; if(!comments[id]) comments[id]=[]; comments[id].push({author:name,text:t,time:Date.now()}); save(); document.getElementById('rt').value=''; renderC(id); toast('Posted!'); loadNews(); }
 function filterB(c){ document.getElementById('q').value=c; cur=c.toLowerCase(); loadNews(); toast('Filter: '+c); window.scrollTo({top:0,behavior:'smooth'}); }
 function showAll(){ document.getElementById('q').value=''; cur='all'; loadNews(); }
-function doSearch(){ loadNews(); renderManual(); }
-function renderManual(){ let q=document.getElementById('q').value.toLowerCase(); let list=manual.filter(t=>!q||t.title.toLowerCase().includes(q)); let html=list.length?'<div style="margin-top:10px;background:#1a4d1a;padding:5px;text-align:center;border-radius:5px;font-size:12px;color:#fff">Member Topics</div>':''; list.forEach(t=>{html+=`<div class="news-item" onclick="openMan(${t.id})">» <b>${t.title}</b> «<span class="meta">${t.cat} • by ${t.author} • ${timeAgo(t.time)}</span></div>`}); document.getElementById('manualBox').innerHTML=html; }
-function openMan(id){ let t=manual.find(x=>x.id===id); if(!t) return; document.getElementById('vTitle').textContent=t.title; document.getElementById('vBody').innerHTML=`<div class="comment"><b>${t.author}</b><br>${t.content}</div><div id="cList"></div><textarea id="rt" placeholder="Reply..." rows="3" style="width:100%;padding:7px;margin-top:8px"></textarea><button onclick="postC('m_${id}')" style="background:#003300;color:#fff;padding:7px 14px;border:none;border-radius:4px;margin-top:6px">Reply</button>`; renderC('m_'+id); openModal('viewModal'); }
-function createPost(){ let title=document.getElementById('nTitle').value.trim(); let cont=document.getElementById('nCont').value.trim(); let cat=document.getElementById('nCat').value; if(!title||!cont) return toast('Need title & content'); manual.unshift({id:Date.now(),title,content:cont,cat,author:user,time:Date.now()}); localStorage.setItem('naija_topics',JSON.stringify(manual)); closeModal('postModal'); renderManual(); toast('Posted!'); }
+function doSearch(){ loadNews(); }
+function createPost(){ let title=document.getElementById('nTitle').value.trim(); let cont=document.getElementById('nCont').value.trim(); let cat=document.getElementById('nCat').value; if(!title||!cont) return toast('Need title & content'); TRENDING.unshift({title,cat,src:user,desc:cont,time:Date.now(),link:''}); save(); closeModal('postModal'); loadNews(); toast('Posted!'); }
 function openModal(id){document.getElementById(id).classList.add('show');}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
-function doReg(){let n=document.getElementById('rName').value.trim(); if(!n) return toast('Enter name'); user=n; localStorage.setItem('naija_user',n); localStorage.setItem('naija_users',(parseInt(localStorage.getItem('naija_users')||1)+1)); document.getElementById('userLabel').textContent=n; closeModal('regModal'); toast('Welcome '+n); loadNews();}
-function toast(m){let t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2500);}
+function doReg(){let n=document.getElementById('rName').value.trim(); if(!n) return toast('Enter name'); user=n; localStorage.setItem('naija_user',n); localStorage.setItem('naija_users',(parseInt(localStorage.getItem('naija_users')||2)+1)); document.getElementById('userLabel').textContent=n; closeModal('regModal'); toast('Welcome '+n); loadNews();}
+function toast(m){let t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',3000);}
 function timeAgo(ts){let s=Math.floor((Date.now()-ts)/1000); if(s<60) return s+'s ago'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago';}
 init();
-setInterval(()=>loadNews(true),180000);
+setInterval(()=>{ if(document.getElementById('q').value==='') loadNews(); },180000);
 </script>
 </body>
 </html>
