@@ -1,37 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nairaland Forum - The Nigerian Forum</title>
+<title>Blessman Forum - The Nigerian Forum</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Verdana,Arial,sans-serif}
-body{background:#000;color:#fff;min-height:100vh}
-a{color:#b7e5b7;text-decoration:none;cursor:pointer}
-a:hover{text-decoration:underline;color:#fff}
+body{background:#000;color:#fff}
 .header{background:#003300;border-bottom:4px solid #1a5c1a;padding:12px;text-align:center;position:sticky;top:0;z-index:10}
-.header h1{font-size:28px;letter-spacing:1px;color:#e8f5e8;text-shadow:0 0 5px #00ff00}
+.header h1{font-size:28px;color:#e8f5e8}
 .navline{font-size:13px;margin:6px 0;color:#c8e6c8}
-.navline b{color:#fff}
-.stats{font-size:12px;margin-top:8px;line-height:1.4}
+.navline span{cursor:pointer}
+.stats{font-size:12px;margin-top:8px;background:#001a00;padding:6px;border-radius:6px}
 .search-box{margin:12px auto;display:flex;gap:8px;justify-content:center;max-width:500px}
-.search-box input{flex:1;padding:8px 12px;border-radius:20px;border:1px solid #2d5a2d;background:#0a1a0a;color:#fff;outline:none}
+.search-box input{flex:1;padding:8px 12px;border-radius:20px;border:1px solid #2d5a2d;background:#0a1a0a;color:#fff}
 .search-box button{padding:8px 16px;border-radius:20px;border:none;background:#2d5a2d;color:#fff;cursor:pointer}
-.search-box button:hover{background:#3d7a3d}
 .main{max-width:900px;margin:10px auto;padding:0 8px}
 .card{background:#0f2f0f;border:1px solid #1a4d1a;border-radius:12px;padding:12px;margin:10px 0}
 .card h2{text-align:center;font-size:16px;margin-bottom:10px;color:#d0f0d0}
 .category-text{font-size:14px;line-height:1.7;color:#c8e6c8}
 .category-text b{color:#e8ffe8}
 .category-text span{cursor:pointer}
-.category-text span:hover{color:#fff;text-decoration:underline}
 .topic{background:#f5f5e5;color:#000;border:1px solid #999;border-radius:4px;margin:6px 0;overflow:hidden;cursor:pointer}
-.topic-header{background:#e8e8d0;padding:6px 10px;font-weight:bold;font-size:13px;color:#333;display:flex;justify-content:space-between}
+.topic-header{background:#e8e8d0;padding:6px 10px;font-weight:bold;font-size:13px;color:#333}
 .topic-body{padding:10px;background:#fffbe6}
 .topic-title{font-weight:bold;font-size:15px;margin-bottom:4px;color:#000}
 .topic-meta{font-size:12px;color:#555}
 .create-btn{background:#2e5a2e;color:#fff;border:none;width:100%;padding:10px;font-weight:bold;cursor:pointer;font-size:14px}
-.create-btn:hover{background:#3d7a3d}
 .ad{border-radius:10px;overflow:hidden;margin:12px 0;background:#111;text-align:center;border:1px solid #333}
 .footer-links{text-align:center;padding:12px;font-size:13px;background:#0f2f0f;border-radius:12px;margin-top:10px;border:1px solid #1a4d1a}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:100;align-items:center;justify-content:center;padding:10px}
@@ -42,101 +37,92 @@ a:hover{text-decoration:underline;color:#fff}
 .modal-body input,.modal-body textarea,.modal-body select{width:100%;padding:10px;margin:6px 0;border:1px solid #ccc;border-radius:4px}
 .modal-body button{background:#003300;color:#fff;padding:10px 20px;border:none;border-radius:4px;cursor:pointer;margin-top:8px}
 .comment{background:#f0f0e0;padding:10px;margin:8px 0;border-left:3px solid #2e5a2e;font-size:13px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#003300;color:#fff;padding:10px 20px;border-radius:20px;display:none;z-index:200;font-size:13px}
 </style>
 </head>
 <body>
 <div class="header">
-<h1 onclick="goHome()">NAIRALAND FORUM</h1>
-<div class="navline">
-Welcome, <b id="userLabel">Guest</b>: 
-<span onclick="openModal('registerModal')">Register</span> • 
-<span onclick="openModal('loginModal')">Login</span> • 
-<span onclick="toast('Google login coming!')">With Google</span> • 
-<span onclick="filterBy('trending')">Trending</span> • 
-<span onclick="filterBy('recent')">Recent</span> • 
-<span onclick="filterBy('new')">New</span>
-</div>
-<div class="stats">
-<b>Stats:</b> <span id="memberCount">3,345,307</span> members, <span id="topicCount">8,516,666</span> topics. 
-<b>Date:</b> <span id="dateStr"></span>
-</div>
-<div class="search-box">
-<input id="searchInput" placeholder="Search topics, users, boards..." onkeyup="if(event.key==='Enter')doSearch()">
-<button onclick="doSearch()">Search</button>
-</div>
+<h1 onclick="location.reload()">BLESSMAN FORUM</h1>
+<div class="navline">Welcome, <b id="userLabel">Guest</b>: <span onclick="openModal('registerModal')">Register</span> - <span onclick="openModal('loginModal')">Login</span> - <span onclick="toast('With Google coming')">With Google</span> - <span onclick="filterBy('trending')">Trending</span> - <span onclick="filterBy('recent')">Recent</span> - <span onclick="filterBy('new')">New</span></div>
+<div class="stats"><b>My Forum Stats:</b> <span id="memberCount">1</span> members, <span id="topicCount">44</span> topics • <span id="dateStr"></span></div>
+<div class="search-box"><input id="searchInput" placeholder="Search topics, users, boards..."><button onclick="doSearch()">Search</button></div>
 </div>
 <div class="main">
-<div class="card">
-<h2>Welcome to the Nigerian Forum</h2>
-<div class="category-text" id="categoryList"></div>
-</div>
+<div class="card"><h2>Welcome to Blessman Forum</h2><div class="category-text" id="categoryList"></div></div>
 <button class="create-btn" onclick="openModal('createModal')">+ CREATE NEW TOPIC</button>
 <div id="topicsContainer"></div>
-<div class="ad" onclick="window.open('https://maventrading.com','_blank')">
-<div style="background:linear-gradient(90deg,#000,#222);color:#fff;padding:15px;display:flex;align-items:center;gap:10px">
-<div style="font-size:30px">💰</div>
-<div style="text-align:left"><div style="font-size:11px">Maven</div><div style="background:orange;color:#000;padding:2px 6px;font-weight:bold;display:inline">100:1 Gold Leverage</div><div>on Omo Challenge</div><div style="font-size:10px;opacity:0.7">maventrading.com</div></div>
+<div class="ad"><div style="background:linear-gradient(90deg,#000,#222);color:#fff;padding:15px;display:flex;align-items:center;gap:10px"><div style="font-size:30px">💰</div><div style="text-align:left"><div style="font-size:11px">Advertise Here</div><div style="background:orange;color:#000;padding:2px 6px;font-weight:bold;display:inline">Contact Blessman</div><div>for advert</div></div></div></div>
+<div class="footer-links">Latest News - Twitter - Facebook - How To Advertise</div>
 </div>
-</div>
-<div class="footer-links">
-<span onclick="filterBy('latest')">Latest News</span> • 
-<span onclick="toast('Opening Twitter')">Twitter</span> • 
-<span onclick="toast('Opening Facebook')">Facebook</span> • 
-<span onclick="toast('How to advertise')">How To Advertise</span> • 
-<span>₦1350.86</span>
-</div>
-</div>
-<div class="modal" id="createModal"><div class="modal-box">
-<div class="modal-header"><b>Create New Topic</b><span onclick="closeModal('createModal')" style="cursor:pointer;font-size:20px">×</span></div>
-<div class="modal-body">
-<select id="newCategory"></select>
-<input id="newTitle" placeholder="Topic title... e.g. Fuel price don drop?">
-<textarea id="newContent" rows="5" placeholder="Write your story..."></textarea>
-<input id="newAuthor" placeholder="Your name (Guest)">
-<button onclick="createTopic()">Post Topic</button>
-</div></div></div>
-<div class="modal" id="viewModal"><div class="modal-box">
-<div class="modal-header"><b id="viewTitle">Topic</b><span onclick="closeModal('viewModal')" style="cursor:pointer;font-size:20px">×</span></div>
-<div class="modal-body" id="viewBody"></div>
-</div></div>
-<div class="modal" id="loginModal"><div class="modal-box">
-<div class="modal-header"><b>Login</b><span onclick="closeModal('loginModal')" style="cursor:pointer">×</span></div>
-<div class="modal-body">
-<input id="loginName" placeholder="Username">
-<button onclick="login()">Login as Guest</button>
-</div></div></div>
-<div class="modal" id="registerModal"><div class="modal-box">
-<div class="modal-header"><b>Register</b><span onclick="closeModal('registerModal')" style="cursor:pointer">×</span></div>
-<div class="modal-body">
-<input id="regName" placeholder="Choose username">
-<button onclick="register()">Register</button>
-</div></div></div>
-<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#003300;color:#fff;padding:10px 20px;border-radius:20px;display:none;z-index:200;font-size:13px"></div>
+<div class="modal" id="createModal"><div class="modal-box"><div class="modal-header"><b>Create New Topic</b><span onclick="closeModal('createModal')" style="cursor:pointer">X</span></div><div class="modal-body"><select id="newCategory"></select><input id="newTitle" placeholder="Title"><textarea id="newContent" rows="5" placeholder="Content"></textarea><input id="newAuthor" placeholder="Your name"><button onclick="createTopic()">Post Topic</button></div></div></div>
+<div class="modal" id="viewModal"><div class="modal-box"><div class="modal-header"><b id="viewTitle">Topic</b><span onclick="closeModal('viewModal')" style="cursor:pointer">X</span></div><div class="modal-body" id="viewBody"></div></div></div>
+<div class="modal" id="loginModal"><div class="modal-box"><div class="modal-header"><b>Login</b><span onclick="closeModal('loginModal')" style="cursor:pointer">X</span></div><div class="modal-body"><input id="loginName" placeholder="Username"><button onclick="login()">Login</button></div></div></div>
+<div class="modal" id="registerModal"><div class="modal-box"><div class="modal-header"><b>Register</b><span onclick="closeModal('registerModal')" style="cursor:pointer">X</span></div><div class="modal-body"><input id="regName" placeholder="Choose username"><button onclick="register()">Register</button></div></div></div>
+<div id="toast"></div>
 <script>
-const boards={
-"Nairaland General":["Politics","Crime","Romance","Jobs/Vacancies","Career","Business","Investment","NYSC","Education","Autos","Car Talk","Properties","Health","Travel","Family","Culture","Christianity Etc","Islam","Food","Diaries","Nairaland Ads","Pets","Agriculture"],
-"Entertainment":["Jokes Etc","TV/Movies","Music/Radio","Celebrities","Fashion","Events","Sports","Gaming","Forum Games","Literature"],
-"Science/Technology":["Programming","Webmasters","Computers","Phones","Art","Graphics & Video","Technology Market"]
+const boards = {
+"Nairaland General": ["Politics","Crime","Romance","Jobs/Vacancies","Career","Business","Investment","NYSC","Education","Autos","Car Talk","Properties","Health","Travel","Family","Culture","Christianity Etc","Islam","Food","Diaries","Nairaland Ads","Pets","Agriculture"],
+"Entertainment": ["Jokes Etc","TV/Movies","Music/Radio","Celebrities","Fashion","Events","Sports","Gaming","Forum Games","Literature"],
+"Science/Technology": ["Programming","Webmasters","Computers","Phones","Art","Graphics & Video","Technology Market"]
 };
-let topics=JSON.parse(localStorage.getItem('naija_topics')||'null')||[
-{id:1,cat:"Politics",title:"Fuel price don drop? NNPC talk",views:1201,author:"blessman13e",time:Date.now()-3600000,content:"Guys, I hear say fuel don drop for some stations. Anybody confirm?"},
-{id:2,cat:"Romance",title:"My girlfriend say choose her or mama",views:892,author:"Anonymous",time:Date.now()-7200000,content:"Abeg advise me. My girlfriend say I must choose between her and my mama."},
-{id:3,cat:"Crime",title:"Thief caught for Computer Village",views:2341,author:"LagosBoy",time:Date.now()-10800000,content:"Dem catch thief yesterday for Ikeja Computer Village with 10 stolen laptops."},
-{id:4,cat:"Jobs/Vacancies",title:"FG announce 50k jobs for youth",views:4521,author:"NaijaNews",time:Date.now()-2000000,content:"Federal Government don announce new recruitment..."},
-{id:5,cat:"Programming",title:"How I take build Nairaland clone for Cloudflare",views:321,author:"blessman13e",time:Date.now()-100000,content:"I use HTML, CSS, JS and Cloudflare Pages. Ask me anything!"}
+let topicsData = [
+{"id":1,"cat":"Politics","title":"Tinubu announces new policy for youth","views":12,"author":"blessman13e","time":Date.now()-1000000,"content":"Make una discuss this policy"},
+{"id":2,"cat":"Politics","title":"Peter Obi reacts to fuel price","views":21,"author":"NaijaGuy","time":Date.now()-2000000,"content":"Peter Obi don talk about fuel matter"},
+{"id":3,"cat":"Crime","title":"EFCC arrests 15 Yahoo boys Computer Village","views":23,"author":"LagosBabe","time":Date.now()-3000000,"content":"EFCC catch dem for Ikeja"},
+{"id":4,"cat":"Crime","title":"Police catch thief for Lekki","views":5,"author":"Guest","time":Date.now()-4000000,"content":"Thief caught with stolen cars"},
+{"id":5,"cat":"Romance","title":"Should I forgive my boyfriend after cheating?","views":34,"author":"Anonymous","time":Date.now()-5000000,"content":"Abeg advise me"},
+{"id":6,"cat":"Romance","title":"My girlfriend say choose her or mama","views":8,"author":"Tolu","time":Date.now()-6000000,"content":"Mama vs girlfriend wahala"},
+{"id":7,"cat":"Jobs/Vacancies","title":"NNPC recruitment 2026 don start","views":45,"author":"NaijaNews","time":Date.now()-7000000,"content":"Apply now for NNPC"},
+{"id":8,"cat":"Career","title":"Remote job $2000 monthly - how I get am","views":9,"author":"Chinedu","time":Date.now()-8000000,"content":"Share my remote job experience"},
+{"id":9,"cat":"Business","title":"POS business 50k to 300k monthly","views":21,"author":"Ade","time":Date.now()-9000000,"content":"My POS business success"},
+{"id":10,"cat":"Investment","title":"Best crypto to invest November","views":7,"author":"Emeka","time":Date.now()-10000000,"content":"Crypto investment tips"},
+{"id":11,"cat":"NYSC","title":"NYSC PPA oga no dey pay me","views":4,"author":"Corper","time":Date.now()-11000000,"content":"NYSC wahala"},
+{"id":12,"cat":"Education","title":"JAMB cutoff 2026/2027 don drop","views":32,"author":"Student","time":Date.now()-12000000,"content":"JAMB cutoff gist"},
+{"id":13,"cat":"Autos","title":"Tokunbo Camry 2010 price drop Lagos","views":6,"author":"CarDealer","time":Date.now()-13000000,"content":"Camry price don drop"},
+{"id":14,"cat":"Car Talk","title":"Why my car dey overheat traffic","views":3,"author":"Driver","time":Date.now()-14000000,"content":"Car overheating issue"},
+{"id":15,"cat":"Properties","title":"2 bedroom Lekki 800k yearly","views":8,"author":"Agent","time":Date.now()-15000000,"content":"House for rent Lekki"},
+{"id":16,"cat":"Health","title":"Natural cure for Ulcer wey work","views":4,"author":"HealthGuy","time":Date.now()-16000000,"content":"Ulcer cure I use"},
+{"id":17,"cat":"Travel","title":"How I japa to Canada with 3m","views":19,"author":"JapaGuy","time":Date.now()-17000000,"content":"Japa story Canada"},
+{"id":18,"cat":"Family","title":"Mother-in-law dey control my marriage","views":10,"author":"Wife","time":Date.now()-18000000,"content":"Family wahala"},
+{"id":19,"cat":"Culture","title":"Igbo wedding list too cost","views":7,"author":"IgboBoy","time":Date.now()-19000000,"content":"Wedding list expensive"},
+{"id":20,"cat":"Christianity Etc","title":"Adeboye message on forgiveness today","views":5,"author":"Christian","time":Date.now()-20000000,"content":"Pastor Adeboye message"},
+{"id":21,"cat":"Islam","title":"Ramadan 2026 timetable Lagos","views":3,"author":"Muslim","time":Date.now()-21000000,"content":"Ramadan timetable"},
+{"id":22,"cat":"Food","title":"Perfect Jollof rice like party own","views":21,"author":"Cook","time":Date.now()-22000000,"content":"Jollof recipe"},
+{"id":23,"cat":"Diaries","title":"My life as Yahoo boy I regret","views":43,"author":"ExYahoo","time":Date.now()-23000000,"content":"My diary"},
+{"id":24,"cat":"Nairaland Ads","title":"iPhone 13 Pro Max 350k for sale","views":2,"author":"Seller","time":Date.now()-24000000,"content":"Phone for sale"},
+{"id":25,"cat":"Pets","title":"Dog Bingo give birth 6 puppies","views":1,"author":"DogLover","time":Date.now()-25000000,"content":"Puppies for sale"},
+{"id":26,"cat":"Agriculture","title":"2m from plantain farm 6 months","views":9,"author":"Farmer","time":Date.now()-26000000,"content":"Plantain farming success"},
+{"id":27,"cat":"Jokes Etc","title":"Teacher ask why chicken cross road","views":54,"author":"Joker","time":Date.now()-27000000,"content":"Funny joke"},
+{"id":28,"cat":"TV/Movies","title":"BBNaija Season 9 winner emerge","views":32,"author":"BBNFan","time":Date.now()-28000000,"content":"BBNaija gist"},
+{"id":29,"cat":"Music/Radio","title":"Wizkid new album break record","views":21,"author":"MusicLover","time":Date.now()-29000000,"content":"Wizkid album record"},
+{"id":30,"cat":"Celebrities","title":"Davido buy Lamborghini for Chioma","views":54,"author":"CelebGist","time":Date.now()-30000000,"content":"Davido Lambo"},
+{"id":31,"cat":"Fashion","title":"Best tailor native wear Lagos Island","views":4,"author":"Fashionista","time":Date.now()-31000000,"content":"Tailor recommendation"},
+{"id":32,"cat":"Events","title":"Detty December concert list 2026","views":8,"author":"EventGuy","time":Date.now()-32000000,"content":"December events"},
+{"id":33,"cat":"Sports","title":"Super Eagles qualify World Cup 2026!","views":76,"author":"blessman13e","time":Date.now()-33000000,"content":"Super Eagles don qualify! Up Eagles!"},
+{"id":34,"cat":"Sports","title":"Chelsea vs Arsenal who go win?","views":21,"author":"FootballFan","time":Date.now()-34000000,"content":"Predict Chelsea vs Arsenal"},
+{"id":35,"cat":"Gaming","title":"PS5 price drop Computer Village","views":5,"author":"Gamer","time":Date.now()-35000000,"content":"PS5 price don drop"},
+{"id":36,"cat":"Forum Games","title":"Guess next person to comment game","views":3,"author":"GameMaster","time":Date.now()-36000000,"content":"Game time! Guess next commenter"},
+{"id":37,"cat":"Literature","title":"My novel Tears of a Broken Heart","views":1,"author":"Writer","time":Date.now()-37000000,"content":"My new novel"},
+{"id":38,"cat":"Programming","title":"How I build this forum Cloudflare Pages","views":3,"author":"blessman13e","time":Date.now()-38000000,"content":"I build this forum with HTML JS and Cloudflare"},
+{"id":39,"cat":"Webmasters","title":"How to rank blog Google 2026","views":4,"author":"Blogger","time":Date.now()-39000000,"content":"SEO tips 2026"},
+{"id":40,"cat":"Computers","title":"Best laptop programming under 300k","views":6,"author":"TechGuy","time":Date.now()-40000000,"content":"Laptop recommendation"},
+{"id":41,"cat":"Phones","title":"Infinix vs Tecno which better?","views":10,"author":"PhoneGuy","time":Date.now()-41000000,"content":"Infinix vs Tecno debate"},
+{"id":42,"cat":"Art","title":"My pencil drawing Burna Boy rate am","views":7,"author":"Artist","time":Date.now()-42000000,"content":"Rate my drawing"},
+{"id":43,"cat":"Graphics & Video","title":"Logo design 5k DM me","views":3,"author":"Designer","time":Date.now()-43000000,"content":"Logo for 5k"},
+{"id":44,"cat":"Technology Market","title":"UK used iPhone Samsung for sale","views":5,"author":"TechMarket","time":Date.now()-44000000,"content":"UK used phones cheap"}
 ];
-let comments=JSON.parse(localStorage.getItem('naija_comments')||'{}');
-let currentFilter='all';
-let currentUser=localStorage.getItem('naija_user')||'Guest';
+let topics = JSON.parse(localStorage.getItem('naija_topics')||'null')||topicsData;
+let comments = JSON.parse(localStorage.getItem('naija_comments')||'{}');
+let currentFilter='all'; let currentUser=localStorage.getItem('naija_user')||'Guest';
 function save(){localStorage.setItem('naija_topics',JSON.stringify(topics));localStorage.setItem('naija_comments',JSON.stringify(comments));}
 function init(){
 document.getElementById('userLabel').textContent=currentUser;
 document.getElementById('dateStr').textContent=new Date().toLocaleString('en-NG',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
 let catHtml=''; let options='';
-for(let section in boards){
-catHtml+=`<b>${section}:</b> `;
-catHtml+=boards[section].map(c=>`<span onclick="filterBy('${c}')">${c}</span>`).join(', ')+' <br><br>';
-boards[section].forEach(c=>options+=`<option value="${c}">${c}</option>`);
+for(let sec in boards){
+catHtml+='<b>'+sec+':</b> ';
+catHtml+=boards[sec].map(c=>'<span onclick="filterBy(\''+c+'\')">'+c+'</span>').join(', ')+'<br><br>';
+boards[sec].forEach(c=>options+='<option value="'+c+'">'+c+'</option>');
 }
 document.getElementById('categoryList').innerHTML=catHtml;
 document.getElementById('newCategory').innerHTML=options;
@@ -144,44 +130,39 @@ render();
 }
 function render(){
 let list=[...topics];
-if(currentFilter!=='all' && !['trending','recent','new','latest'].includes(currentFilter)){
-list=list.filter(t=>t.cat===currentFilter);
-}
-if(document.getElementById('searchInput').value){
+if(currentFilter!=='all' && ['trending','recent','new','latest'].indexOf(currentFilter)===-1) list=list.filter(t=>t.cat===currentFilter);
 let q=document.getElementById('searchInput').value.toLowerCase();
-list=list.filter(t=>t.title.toLowerCase().includes(q)||t.cat.toLowerCase().includes(q));
-}
+if(q) list=list.filter(t=>t.title.toLowerCase().includes(q)||t.cat.toLowerCase().includes(q));
 if(currentFilter==='trending') list.sort((a,b)=>b.views-a.views);
-if(currentFilter==='recent'||currentFilter==='new'||currentFilter==='latest') list.sort((a,b)=>b.time-a.time);
+if(['recent','new','latest'].indexOf(currentFilter)!==-1) list.sort((a,b)=>b.time-a.time);
 let html=''; let grouped={};
 list.forEach(t=>{if(!grouped[t.cat])grouped[t.cat]=[];grouped[t.cat].push(t);});
 for(let cat in grouped){
-html+=`<div class="topic-header">${cat}</div>`;
+html+='<div class="topic-header">'+cat+'</div>';
 grouped[cat].forEach(t=>{
-html+=`<div class="topic" onclick="openTopic(${t.id})"><div class="topic-body"><div class="topic-title">${t.title} <span style="float:right;font-size:11px">${(comments[t.id]||[]).length||1}</span></div><div class="topic-meta">${t.views} views • by ${t.author} • ${timeAgo(t.time)}</div></div></div>`;
+html+='<div class="topic" onclick="openTopic('+t.id+')"><div class="topic-body"><div class="topic-title">'+t.title+' <span style="float:right;font-size:11px">'+((comments[t.id]||[]).length||1)+'</span></div><div class="topic-meta">'+t.views+' views - by '+t.author+' - '+timeAgo(t.time)+'</div></div></div>';
 });
 }
-if(!html) html='<div class="card" style="color:#fff;text-align:center">No topics found for "'+currentFilter+'". <span onclick="openModal(\'createModal\')" style="color:#90ee90;cursor:pointer">Create one?</span></div>';
+if(!html) html='<div class="card" style="color:#fff;text-align:center">No topics yet for "'+currentFilter+'". <span onclick="openModal(\'createModal\')" style="color:#90ee90;cursor:pointer;text-decoration:underline">Be first to create one!</span></div>';
 document.getElementById('topicsContainer').innerHTML=html;
-document.getElementById('topicCount').textContent=(8516666+topics.length).toLocaleString();
-document.getElementById('memberCount').textContent=(3345307+(localStorage.getItem('naija_users')||0)).toLocaleString();
+document.getElementById('topicCount').textContent=topics.length;
+let members = parseInt(localStorage.getItem('naija_users')||1);
+document.getElementById('memberCount').textContent=members;
 }
-function filterBy(cat){currentFilter=cat;render();window.scrollTo({top:300,behavior:'smooth'});toast('Showing: '+cat);}
+function filterBy(cat){currentFilter=cat;render();window.scrollTo({top:350,behavior:'smooth'});toast('Showing: '+cat);}
 function doSearch(){render();}
-function goHome(){currentFilter='all';document.getElementById('searchInput').value='';render();}
 function openTopic(id){
-let t=topics.find(x=>x.id===id); if(!t)return;
-t.views++;save();
+let t=topics.find(x=>x.id===id);if(!t)return; t.views++;save();
 document.getElementById('viewTitle').textContent=t.title;
 let comms=comments[id]||[{author:t.author,text:t.content,time:t.time}];
-let chtml=`<div style="font-size:12px;color:#666;margin-bottom:10px">${t.cat} • ${t.views} views</div>`;
-comms.forEach(c=>{chtml+=`<div class="comment"><b>${c.author}</b> • ${timeAgo(c.time)}<br><br>${c.text}</div>`});
-chtml+=`<hr><textarea id="replyText" placeholder="Write reply..." rows="3" style="width:100%;padding:8px;margin-top:10px"></textarea><input id="replyName" placeholder="Your name" value="${currentUser!=='Guest'?currentUser:''}" style="width:100%;padding:8px;margin-top:6px"><button onclick="postReply(${id})">Post Reply</button>`;
+let chtml='<div style="font-size:12px;color:#666;margin-bottom:10px">'+t.cat+' - '+t.views+' views</div>';
+comms.forEach(c=>{chtml+='<div class="comment"><b>'+c.author+'</b> - '+timeAgo(c.time)+'<br><br>'+c.text+'</div>';});
+chtml+='<hr><textarea id="replyText" placeholder="Write reply..." rows="3" style="width:100%;padding:8px;margin-top:10px"></textarea><input id="replyName" placeholder="Your name" value="'+(currentUser!=='Guest'?currentUser:'')+'" style="width:100%;padding:8px;margin-top:6px"><button onclick="postReply('+id+')">Post Reply</button>';
 document.getElementById('viewBody').innerHTML=chtml;
 openModal('viewModal');render();
 }
 function postReply(id){
-let text=document.getElementById('replyText').value.trim(); if(!text)return toast('Write something');
+let text=document.getElementById('replyText').value.trim();if(!text)return toast('Write something');
 let name=document.getElementById('replyName').value.trim()||'Guest';
 if(!comments[id])comments[id]=[];
 comments[id].push({author:name,text:text,time:Date.now()});
@@ -189,14 +170,14 @@ save();openTopic(id);toast('Reply posted!');
 }
 function createTopic(){
 let title=document.getElementById('newTitle').value.trim();let content=document.getElementById('newContent').value.trim();let cat=document.getElementById('newCategory').value;let author=document.getElementById('newAuthor').value.trim()||currentUser||'Guest';
-if(!title||!content) return toast('Title and content needed');
+if(!title||!content)return toast('Title and content needed');
 let nt={id:Date.now(),cat,title,views:1,author,time:Date.now(),content};
 topics.unshift(nt);save();closeModal('createModal');render();toast('Topic created!');document.getElementById('newTitle').value='';document.getElementById('newContent').value='';
 }
 function openModal(id){document.getElementById(id).classList.add('show');}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
 function login(){let n=document.getElementById('loginName').value.trim();if(!n)return toast('Enter name');currentUser=n;localStorage.setItem('naija_user',n);document.getElementById('userLabel').textContent=n;closeModal('loginModal');toast('Welcome '+n);}
-function register(){let n=document.getElementById('regName').value.trim();if(!n)return toast('Enter name');currentUser=n;localStorage.setItem('naija_user',n);localStorage.setItem('naija_users',(parseInt(localStorage.getItem('naija_users')||0)+1));document.getElementById('userLabel').textContent=n;closeModal('registerModal');toast('Registered! Welcome '+n);render();}
+function register(){let n=document.getElementById('regName').value.trim();if(!n)return toast('Enter name');currentUser=n;localStorage.setItem('naija_user',n);let count=parseInt(localStorage.getItem('naija_users')||1)+1;localStorage.setItem('naija_users',count);document.getElementById('userLabel').textContent=n;closeModal('registerModal');toast('Registered! Welcome '+n);render();}
 function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
 function timeAgo(ts){let s=Math.floor((Date.now()-ts)/1000);if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
 init();
